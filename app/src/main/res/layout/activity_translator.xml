@@ -21,7 +21,8 @@
         android:focusable="true"
         android:background="@color/white"
         android:hint="белорусский"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:inputType="textFilter|textMultiLine"
         android:textSize="20sp"
         android:elevation="3dp"
         android:transitionName="@string/transition_language_text_edit"/>
