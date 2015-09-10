@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Translator+</string>
+
+    <string name="error_network">Ошибка подключения, попробуйте позже</string>
+    <string name="error_auth">Ошибка авторизации в Яндекс API</string>
+
+    <string name="transition_toolbar">transition_toolbar</string>
+    <string name="transition_language_text_edit">transition_language_text_edit</string>
+    <string name="enter_text">Введите текст</string>
+</resources>

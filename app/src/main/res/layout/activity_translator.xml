@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:transitionName="@string/transition_toolbar"
+        >
+
+    </LinearLayout>
+
+    <com.nbsp.translator.widget.EditTextBackEvent
+        android:id="@+id/language_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:focusable="true"
+        android:background="@color/white"
+        android:hint="белорусский"
+        android:paddingLeft="16dp"
+        android:textSize="20sp"
+        android:elevation="3dp"
+        android:transitionName="@string/transition_language_text_edit"/>
+
+</FrameLayout>
