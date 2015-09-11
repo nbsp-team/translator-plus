@@ -14,17 +14,34 @@
 
     </LinearLayout>
 
-    <com.nbsp.translator.widget.EditTextBackEvent
-        android:id="@+id/language_edit_text"
+    <LinearLayout
+        android:id="@+id/language_edit_text_container"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:focusable="true"
-        android:background="@color/white"
-        android:hint="белорусский"
-        android:paddingStart="16dp"
-        android:inputType="textFilter|textMultiLine"
-        android:textSize="20sp"
+        android:layout_height="wrap_content"
         android:elevation="3dp"
-        android:transitionName="@string/transition_language_text_edit"/>
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:transitionName="@string/transition_language_text_edit"
+        >
+
+        <com.nbsp.translator.widget.EditTextBackEvent
+            android:id="@+id/language_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:hint="белорусский"
+            android:paddingStart="16dp"
+            android:inputType="textFilter|textMultiLine"
+            android:textSize="20sp"
+            />
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/widget_result_translate" />
+
+    </LinearLayout>
 
 </FrameLayout>
