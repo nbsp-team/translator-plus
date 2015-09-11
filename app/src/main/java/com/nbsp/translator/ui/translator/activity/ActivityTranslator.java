@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.Observable;
+import butterknife.OnClick;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,6 +41,9 @@ public class ActivityTranslator extends AppCompatActivity {
     @Bind(R.id.language_result_container)
     protected LinearLayout mResultContainer;
 
+    @Bind(R.id.close_button)
+    protected ImageView mCloseButton;
+
     private TranslateResultBar mTranslateResultBar;
     private Subscription mTranslateSubscription;
 
@@ -55,18 +60,23 @@ public class ActivityTranslator extends AppCompatActivity {
         mTranslateSubscription = getTranslateSubscription();
     }
 
+    @OnClick(R.id.close_button)
+    protected void onCloseClicked(View view) {
+        onBackPressed();
+    }
+
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mLanguageEditText)
                 .skip(1)
-                .debounce(350, TimeUnit.MILLISECONDS)
                 .doOnNext(new Action1<CharSequence>() {
                     @Override
                     public void call(CharSequence charSequence) {
-                        if(charSequence.length() != 0) {
+                        if (charSequence.length() != 0) {
                             setResultBarStatusLoading();
                         }
                     }
                 })
+                .debounce(350, TimeUnit.MILLISECONDS)
                 .switchMap(new Func1<CharSequence, rx.Observable<Translate>>() {
                     @Override
                     public rx.Observable<Translate> call(CharSequence charSequence) {

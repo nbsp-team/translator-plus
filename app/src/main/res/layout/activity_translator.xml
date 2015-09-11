@@ -25,17 +25,35 @@
         android:transitionName="@string/transition_language_text_edit"
         >
 
-        <com.nbsp.translator.widget.EditTextBackEvent
-            android:id="@+id/language_edit_text"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:focusable="true"
-            android:hint="белорусский"
-            android:paddingStart="16dp"
-            android:inputType="textFilter|textMultiLine"
-            android:textSize="20sp"
-            />
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <com.nbsp.translator.widget.EditTextBackEvent
+                android:id="@+id/language_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:focusable="true"
+                android:hint="белорусский"
+                android:paddingStart="16dp"
+                android:inputType="textFilter|textMultiLine"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:id="@+id/close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="14dp"
+                android:src="@mipmap/ic_close_black"
+                />
+
+        </LinearLayout>
 
         <include
             android:layout_width="wrap_content"

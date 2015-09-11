@@ -12,6 +12,7 @@ import com.nbsp.translator.R;
 public class TranslateResultBar {
 
     private String mCurrentResult;
+    private Boolean mIsStatusWaiting;
 
     private LinearLayout mContainer;
     private TextView mTranslateResultTextView;
@@ -19,6 +20,7 @@ public class TranslateResultBar {
 
     public TranslateResultBar(LinearLayout widget) {
         mContainer = widget;
+        mIsStatusWaiting = false;
         initViews();
     }
 
@@ -31,7 +33,10 @@ public class TranslateResultBar {
     }
 
     public void setWaitingStatus() {
-        mTranslateResultTextView.append("...");
+        if (!mIsStatusWaiting) {
+            mTranslateResultTextView.append("...");
+            mIsStatusWaiting = true;
+        }
     }
 
     public void setCurrentResult(String result) {
@@ -41,6 +46,7 @@ public class TranslateResultBar {
 
         mCurrentResult = result;
         mTranslateResultTextView.setText(result);
+        mIsStatusWaiting = false;
     }
 
     public String getCurrentResult() {
