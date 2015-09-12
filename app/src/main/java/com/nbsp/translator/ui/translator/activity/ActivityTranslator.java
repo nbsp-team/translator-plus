@@ -68,21 +68,13 @@ public class ActivityTranslator extends AppCompatActivity {
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mLanguageEditText)
                 .skip(1)
-                .doOnNext(new Action1<CharSequence>() {
-                    @Override
-                    public void call(CharSequence charSequence) {
-                        if (charSequence.length() != 0) {
-                            setResultBarStatusLoading();
-                        }
+                .doOnNext(charSequence -> {
+                    if (charSequence.length() != 0) {
+                        setResultBarStatusLoading();
                     }
                 })
                 .debounce(350, TimeUnit.MILLISECONDS)
-                .switchMap(new Func1<CharSequence, rx.Observable<Translate>>() {
-                    @Override
-                    public rx.Observable<Translate> call(CharSequence charSequence) {
-                        return Api.getInstance().translate(charSequence.toString(), "en-ru");
-                    }
-                })
+                .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), "en-ru"))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Translate>() {
                     @Override
@@ -103,21 +95,11 @@ public class ActivityTranslator extends AppCompatActivity {
     }
 
     private void setLanguageBarBackListener() {
-        mLanguageEditText.setOnEditTextImeBackListener(new EditTextBackEvent.EditTextImeBackListener() {
-            @Override
-            public void onImeBack(EditTextBackEvent ctrl, String text) {
-                onBackPressed();
-            }
-        });
+        mLanguageEditText.setOnEditTextImeBackListener((ctrl, text) -> onBackPressed());
     }
 
     private void setResultBarStatusLoading() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTranslateResultBar.setWaitingStatus();
-            }
-        });
+        runOnUiThread(mTranslateResultBar::setWaitingStatus);
     }
 
     private void disableBlinking() {
