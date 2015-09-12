@@ -21,7 +21,7 @@ import rx.Observable;
 public class Api {
     private static Api instance;
 
-    private Api () {
+    private Api() {
         initRestAdapter();
         initRequests();
     }
