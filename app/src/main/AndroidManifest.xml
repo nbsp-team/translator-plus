@@ -29,6 +29,12 @@
             android:windowSoftInputMode="stateAlwaysVisible">
         </activity>
 
+        <activity
+            android:name=".ui.result.activity.ActivityResult"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        </activity>
+
     </application>
 
 </manifest>

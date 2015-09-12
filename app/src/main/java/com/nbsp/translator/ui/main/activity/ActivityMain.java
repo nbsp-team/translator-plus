@@ -33,7 +33,7 @@ public class ActivityMain extends AppCompatActivity {
     protected LinearLayout mLanguageInput;
 
     @Bind(R.id.languages_bar)
-    protected View mLanguagesBar;
+    protected LinearLayout mLanguagesBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

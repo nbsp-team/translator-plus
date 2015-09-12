@@ -1,10 +1,18 @@
 package com.nbsp.translator.ui.translator.activity;
 
+import android.app.ActionBar;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -12,6 +20,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Api;
 import com.nbsp.translator.models.Translate;
+import com.nbsp.translator.ui.result.activity.ActivityResult;
 import com.nbsp.translator.ui.translator.widget.TranslateResultBar;
 import com.nbsp.translator.widget.EditTextBackEvent;
 
@@ -31,6 +40,9 @@ import rx.functions.Func1;
  */
 
 public class ActivityTranslator extends AppCompatActivity {
+
+    @Bind(R.id.languages_bar)
+    protected LinearLayout mLanguagesBar;
 
     @Bind(R.id.language_edit_text)
     protected EditTextBackEvent mLanguageEditText;
@@ -54,6 +66,8 @@ public class ActivityTranslator extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mTranslateResultBar = new TranslateResultBar(mResultContainer);
+
+        setResultBarClickListener();
         setLanguageBarBackListener();
         disableBlinking();
 
@@ -64,6 +78,21 @@ public class ActivityTranslator extends AppCompatActivity {
     protected void onCloseClicked(View view) {
         onBackPressed();
     }
+
+    @SuppressWarnings("unchecked")
+    protected void startResultActivityWithAnimation() {
+
+        Intent intent = new Intent(getApplicationContext(), ActivityResult.class);
+
+        Pair<View, String> p1 = Pair.create((View) mLanguagesBar, mLanguagesBar.getTransitionName());
+        Pair<View, String> p2 = Pair.create((View) mLanguageContainer, mLanguageContainer.getTransitionName());
+
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(ActivityTranslator.this, p1, p2);
+
+        ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+    }
+
 
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mLanguageEditText)
@@ -78,9 +107,7 @@ public class ActivityTranslator extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Translate>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
+                    public void onCompleted() {}
 
                     @Override
                     public void onError(Throwable e) {
@@ -96,6 +123,14 @@ public class ActivityTranslator extends AppCompatActivity {
 
     private void setLanguageBarBackListener() {
         mLanguageEditText.setOnEditTextImeBackListener((ctrl, text) -> onBackPressed());
+    }
+
+    private void setResultBarClickListener() {
+        mTranslateResultBar.setOnCLickListener(view -> {
+            if (mTranslateResultBar.getCurrentResult().length() != 0) {
+                startResultActivityWithAnimation();
+            }
+        });
     }
 
     private void setResultBarStatusLoading() {
