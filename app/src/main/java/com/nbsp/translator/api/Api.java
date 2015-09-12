@@ -43,23 +43,15 @@ public class Api {
     private void initRestAdapter() {
         mRestAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
-                .setRequestInterceptor(new RequestInterceptor() {
-                    @Override
-                    public void intercept(RequestFacade request) {
-                        request.addQueryParam("key", API_KEY);
-                    }
-                })
-                .setErrorHandler(new ErrorHandler() {
-                    @Override
-                    public Throwable handleError(RetrofitError cause) {
-                        switch(cause.getKind()) {
-                            case NETWORK:
-                                return new ConnectionException();
-                            case HTTP:
-                                return new AuthException();
-                            default:
-                                return new RuntimeException();
-                        }
+                .setRequestInterceptor(request -> request.addQueryParam("key", API_KEY))
+                .setErrorHandler(cause -> {
+                    switch(cause.getKind()) {
+                        case NETWORK:
+                            return new ConnectionException();
+                        case HTTP:
+                            return new AuthException();
+                        default:
+                            return new RuntimeException();
                     }
                 })
                 .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("RETROFIT"))

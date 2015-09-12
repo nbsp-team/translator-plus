@@ -40,26 +40,6 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-//        Api.getInstance().translate("Hello World", "en-ru")
-//                .observeOn(Schedulers.io())
-//                .subscribe(new Observer<Translate>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    @Override
-//                    public void onNext(Translate translate) {
-//                        Log.v("code", String.valueOf(translate.getCode()));
-//                        Log.v("text", translate.getTexts().get(0));
-//                    }
-//                });
     }
 
     @SuppressWarnings("unchecked")
