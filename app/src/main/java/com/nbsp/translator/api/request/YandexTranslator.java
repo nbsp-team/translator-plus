@@ -1,6 +1,8 @@
 package com.nbsp.translator.api.request;
 
-import com.nbsp.translator.models.Translate;
+import com.nbsp.translator.models.TranslateResult;
+import com.nbsp.translator.models.TranslationDirection;
+
 import retrofit.http.GET;
 import retrofit.http.Query;
 import rx.Observable;
@@ -11,5 +13,5 @@ import rx.Observable;
 public interface YandexTranslator {
 
     @GET("/translate")
-    Observable<Translate> translate(@Query("text") String text, @Query("lang") String lang);
+    Observable<TranslateResult> translate(@Query("text") String text, @Query("lang") TranslationDirection lang);
 }

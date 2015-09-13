@@ -1,7 +1,5 @@
 package com.nbsp.translator.ui.translator.activity;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -11,19 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Api;
-import com.nbsp.translator.models.Translate;
+import com.nbsp.translator.models.Language;
+import com.nbsp.translator.models.TranslateResult;
+import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.ui.result.activity.ActivityResult;
 import com.nbsp.translator.ui.translator.widget.TranslateResultBar;
 import com.nbsp.translator.widget.EditTextBackEvent;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
@@ -32,8 +31,6 @@ import butterknife.OnClick;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by Dimorinny on 10.09.15.
@@ -95,6 +92,11 @@ public class ActivityTranslator extends AppCompatActivity {
 
 
     private Subscription getTranslateSubscription() {
+        TranslationDirection lang = new TranslationDirection(
+                new Language("русский", "ru", new Locale("ru_RU")),
+                new Language("английский", "en", new Locale("en_US"))
+        );
+
         return RxTextView.textChanges(mLanguageEditText)
                 .skip(1)
                 .doOnNext(charSequence -> {
@@ -103,9 +105,9 @@ public class ActivityTranslator extends AppCompatActivity {
                     }
                 })
                 .debounce(350, TimeUnit.MILLISECONDS)
-                .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), "en-ru"))
+                .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), lang))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Translate>() {
+                .subscribe(new Observer<TranslateResult>() {
                     @Override
                     public void onCompleted() {}
 
@@ -115,8 +117,8 @@ public class ActivityTranslator extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(Translate translate) {
-                        mTranslateResultBar.setCurrentResult(translate.getTexts().get(0));
+                    public void onNext(TranslateResult translateResult) {
+                        mTranslateResultBar.setCurrentResult(translateResult.getTexts().get(0));
                     }
                 });
     }

@@ -3,12 +3,10 @@ package com.nbsp.translator.api;
 import com.nbsp.translator.api.request.YandexTranslator;
 import com.nbsp.translator.excpetion.network.AuthException;
 import com.nbsp.translator.excpetion.network.ConnectionException;
-import com.nbsp.translator.models.Translate;
+import com.nbsp.translator.models.TranslateResult;
+import com.nbsp.translator.models.TranslationDirection;
 
-import retrofit.ErrorHandler;
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.android.AndroidLog;
 import rx.Observable;
 
@@ -62,7 +60,7 @@ public class Api {
         mYandexTranslator = mRestAdapter.create(YandexTranslator.class);
     }
 
-    public Observable<Translate> translate(String text, String lang) {
+    public Observable<TranslateResult> translate(String text, TranslationDirection lang) {
         return mYandexTranslator.translate(text, lang);
     }
 }
