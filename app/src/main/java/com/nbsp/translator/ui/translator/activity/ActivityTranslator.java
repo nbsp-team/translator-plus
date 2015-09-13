@@ -18,6 +18,7 @@ import com.nbsp.translator.api.Api;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.ui.main.activity.LanguagePicker;
 import com.nbsp.translator.ui.result.activity.ActivityResult;
 import com.nbsp.translator.ui.translator.widget.TranslateResultBar;
 import com.nbsp.translator.widget.EditTextBackEvent;
@@ -36,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by Dimorinny on 10.09.15.
  */
 
-public class ActivityTranslator extends AppCompatActivity {
+public class ActivityTranslator extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
 
     @Bind(R.id.languages_bar)
     protected LinearLayout mLanguagesBar;
@@ -151,5 +152,10 @@ public class ActivityTranslator extends AppCompatActivity {
     protected void onDestroy() {
         mTranslateSubscription.unsubscribe();
         super.onDestroy();
+    }
+
+    @Override
+    public void onTranslationDirectionChanged(TranslationDirection direction) {
+
     }
 }

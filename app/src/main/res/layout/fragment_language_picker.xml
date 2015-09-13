@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <FrameLayout
+        android:background="@drawable/bg_clickable_blue"
+        android:clipChildren="true"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_toStartOf="@id/btn_swap"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        >
+        <Spinner
+            android:textAppearance="?android:textAppearanceMedium"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/language_from"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:singleLine="true"
+            />
+    </FrameLayout>
+
+    <!-- TODO: 32dp -->
+    <ImageView
+        android:id="@id/btn_swap"
+        android:background="@drawable/bg_clickable_circle"
+        android:src="@drawable/ic_swap_horiz_white_36dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/swap_languages"
+        android:clickable="true"
+        />
+
+    <FrameLayout
+        android:background="@drawable/bg_clickable_blue"
+        android:clipChildren="true"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_toEndOf="@id/btn_swap"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        >
+        <Spinner
+            android:textAppearance="?android:textAppearanceMedium"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/language_to"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:singleLine="true"
+            />
+    </FrameLayout>
+</RelativeLayout>

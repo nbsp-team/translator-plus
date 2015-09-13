@@ -2,11 +2,13 @@ package com.nbsp.translator.models;
 
 import android.util.Pair;
 
+import java.io.Serializable;
+
 /**
  * Created by nickolay on 13.09.15.
  */
 
-public class TranslationDirection extends Pair<Language, Language> {
+public class TranslationDirection extends Pair<Language, Language> implements Serializable {
     /**
      * Constructor for a translation pair.
      *

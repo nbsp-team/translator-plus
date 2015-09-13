@@ -6,10 +6,12 @@ import android.transition.Fade;
 import android.transition.Transition;
 
 import com.nbsp.translator.R;
+import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.ui.main.activity.LanguagePicker;
 
 import butterknife.ButterKnife;
 
-public class ActivityResult extends AppCompatActivity {
+public class ActivityResult extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +28,10 @@ public class ActivityResult extends AppCompatActivity {
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
         getWindow().setExitTransition(fade);
         getWindow().setEnterTransition(fade);
+    }
+
+    @Override
+    public void onTranslationDirectionChanged(TranslationDirection direction) {
+
     }
 }

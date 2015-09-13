@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.nbsp.translator.R;
+import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.ui.translator.activity.ActivityTranslator;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityMain extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
 
     @Bind(R.id.language_input_container)
     protected LinearLayout mLanguageInput;
@@ -43,5 +44,10 @@ public class ActivityMain extends AppCompatActivity {
                 .makeSceneTransitionAnimation(ActivityMain.this, p1, p2);
 
         ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+    }
+
+    @Override
+    public void onTranslationDirectionChanged(TranslationDirection direction) {
+
     }
 }

@@ -15,7 +15,13 @@
         android:background="?attr/colorPrimary"
         android:transitionName="@string/transition_toolbar"
         >
-
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="com.nbsp.translator.ui.main.activity.LanguagePicker"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/language_picker">
+        </fragment>
     </LinearLayout>
 
     <LinearLayout

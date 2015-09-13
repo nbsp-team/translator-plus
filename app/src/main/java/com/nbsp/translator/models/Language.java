@@ -1,12 +1,13 @@
 package com.nbsp.translator.models;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 /**
  * Created by nickolay on 13.09.15.
  */
 
-public class Language {
+public class Language implements Serializable {
     private String name;
     private String yandexCode;
     private Locale locale;
