@@ -3,8 +3,8 @@ package com.nbsp.translator.utils;
 import android.content.Context;
 
 import com.nbsp.translator.R;
-import com.nbsp.translator.excpetion.network.AuthException;
 import com.nbsp.translator.exception.network.ConnectionException;
+import com.nbsp.translator.exception.network.AuthException;
 
 /**
  * Created by Dimorinny on 11.09.15.
