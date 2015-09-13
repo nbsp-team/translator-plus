@@ -21,19 +21,20 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:singleLine="true"
+            style="@style/Widget.AppTheme.HeaderBar.Spinner"
             />
     </FrameLayout>
 
-    <!-- TODO: 32dp -->
     <ImageView
         android:id="@id/btn_swap"
         android:background="@drawable/bg_clickable_circle"
-        android:src="@drawable/ic_swap_horiz_white_36dp"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:src="@drawable/ic_swap_horizontal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/swap_languages"
+        android:alpha="0.75"
         android:clickable="true"
         />
 
@@ -54,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:singleLine="true"
+            style="@style/Widget.AppTheme.HeaderBar.Spinner"
             />
     </FrameLayout>
 </RelativeLayout>

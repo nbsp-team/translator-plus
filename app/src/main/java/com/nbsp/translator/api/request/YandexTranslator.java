@@ -1,5 +1,6 @@
 package com.nbsp.translator.api.request;
 
+import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
 
@@ -14,4 +15,7 @@ public interface YandexTranslator {
 
     @GET("/translate")
     Observable<TranslateResult> translate(@Query("text") String text, @Query("lang") TranslationDirection lang);
+
+    @GET("/translate")
+    Observable<Language> getLanguages(@Query("text") String text, @Query("lang") TranslationDirection lang);
 }

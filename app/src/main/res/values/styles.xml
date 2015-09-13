@@ -8,4 +8,22 @@
         <item name="colorAccent">#757575</item>
     </style>
 
+    <style name="LanguageSpinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+        <item name="android:overlapAnchor">true</item>
+    </style>
+
+    <style name="ToolBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#fff</item>
+        <item name="colorControlActivated">#fff</item>
+    </style>
+
+    <style name="Widget.AppTheme.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:theme">@style/ToolBarThemeOverlay</item>
+    </style>
+
 </resources>
