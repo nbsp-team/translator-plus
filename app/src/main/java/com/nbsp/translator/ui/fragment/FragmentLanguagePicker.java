@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -17,11 +18,20 @@ import com.nbsp.translator.models.TranslationDirection;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class FragmentLanguagePicker extends Fragment {
     private OnLanguagePickerEventsListener mListener;
 
-    private Spinner mFromSpinner;
-    private Spinner mToSpinner;
+    @Bind(R.id.language_from)
+    protected Spinner mFromSpinner;
+
+    @Bind(R.id.language_to)
+    protected Spinner mToSpinner;
+
+    @Bind(R.id.btn_swap)
+    protected View mSwapButton;
 
     public static FragmentLanguagePicker newInstance() {
         return new FragmentLanguagePicker();
@@ -38,9 +48,7 @@ public class FragmentLanguagePicker extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_language_picker, container, false);
-
-        mFromSpinner = (Spinner) view.findViewById(R.id.language_from);
-        mToSpinner = (Spinner) view.findViewById(R.id.language_to);
+        ButterKnife.bind(this, view);
 
         SpinnerAdapter fromAdapter = new LanguagePickerAdapter();
         SpinnerAdapter toAdapter = new LanguagePickerAdapter();
@@ -74,6 +82,12 @@ public class FragmentLanguagePicker extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
+        });
+
+        mSwapButton.setOnClickListener(v -> {
+            Languages.getInstance().getTranslationDirection().swap();
+            loadDirection();
+            onDirectionChanged();
         });
 
         loadDirection();

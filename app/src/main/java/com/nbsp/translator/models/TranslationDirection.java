@@ -37,4 +37,10 @@ public class TranslationDirection implements Serializable {
     public String toString() {
         return String.format("%s-%s", getFrom().getYandexCode(), getTo().getYandexCode());
     }
+
+    public void swap() {
+        Language temp = to;
+        to = from;
+        from = temp;
+    }
 }
