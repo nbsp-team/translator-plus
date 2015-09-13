@@ -19,7 +19,7 @@ public class Language implements Serializable {
     }
 
     public String getYandexCode() {
-        return locale.getCountry();
+        return locale.toLanguageTag();
     }
 
     public Locale getLocale() {
