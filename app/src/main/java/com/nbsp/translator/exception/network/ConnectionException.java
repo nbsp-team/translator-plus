@@ -1,4 +1,4 @@
-package com.nbsp.translator.excpetion.network;
+package com.nbsp.translator.exception.network;
 
 /**
  * Created by Dimorinny on 11.09.15.
