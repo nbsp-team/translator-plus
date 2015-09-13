@@ -1,4 +1,4 @@
-package com.nbsp.translator.ui.result.activity;
+package com.nbsp.translator.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +7,11 @@ import android.transition.Transition;
 
 import com.nbsp.translator.R;
 import com.nbsp.translator.models.TranslationDirection;
-import com.nbsp.translator.ui.main.activity.LanguagePicker;
+import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 
 import butterknife.ButterKnife;
 
-public class ActivityResult extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
+public class ActivityResult extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

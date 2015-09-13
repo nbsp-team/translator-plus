@@ -9,32 +9,26 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-
         <activity
-            android:name=".ui.main.activity.ActivityMain"
+            android:name=".ui.ActivityMain"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".ui.translator.activity.ActivityTranslator"
+            android:name=".ui.ActivityTranslator"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysVisible">
+            android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
-
         <activity
-            android:name=".ui.result.activity.ActivityResult"
+            android:name=".ui.ActivityResult"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
         </activity>
-
     </application>
 
 </manifest>

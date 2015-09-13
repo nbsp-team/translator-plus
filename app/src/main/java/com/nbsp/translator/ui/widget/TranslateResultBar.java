@@ -1,4 +1,4 @@
-package com.nbsp.translator.ui.translator.widget;
+package com.nbsp.translator.ui.widget;
 
 import android.view.View;
 import android.widget.LinearLayout;

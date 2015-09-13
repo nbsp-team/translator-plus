@@ -8,22 +8,18 @@ import java.util.Locale;
  */
 
 public class Language implements Serializable {
-    private String name;
-    private String yandexCode;
     private Locale locale;
 
-    public Language(String name, String yandexCode, Locale locale) {
-        this.name = name;
-        this.yandexCode = yandexCode;
-        this.locale = locale;
+    public Language(String code) {
+        this.locale = new Locale(code);
     }
 
     public String getName() {
-        return name;
+        return locale.getDisplayName(Locale.getDefault());
     }
 
     public String getYandexCode() {
-        return yandexCode;
+        return locale.getCountry();
     }
 
     public Locale getLocale() {

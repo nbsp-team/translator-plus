@@ -1,4 +1,4 @@
-package com.nbsp.translator.ui.translator.activity;
+package com.nbsp.translator.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,12 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Api;
+import com.nbsp.translator.api.Languages;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
-import com.nbsp.translator.ui.main.activity.LanguagePicker;
-import com.nbsp.translator.ui.result.activity.ActivityResult;
-import com.nbsp.translator.ui.translator.widget.TranslateResultBar;
+import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
+import com.nbsp.translator.ui.widget.TranslateResultBar;
 import com.nbsp.translator.widget.EditTextBackEvent;
 
 import java.util.Locale;
@@ -37,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by Dimorinny on 10.09.15.
  */
 
-public class ActivityTranslator extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
+public class ActivityTranslator extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
 
     @Bind(R.id.languages_bar)
     protected LinearLayout mLanguagesBar;
@@ -93,11 +93,6 @@ public class ActivityTranslator extends AppCompatActivity implements LanguagePic
 
 
     private Subscription getTranslateSubscription() {
-        TranslationDirection lang = new TranslationDirection(
-                new Language("русский", "ru", new Locale("ru_RU")),
-                new Language("английский", "en", new Locale("en_US"))
-        );
-
         return RxTextView.textChanges(mLanguageEditText)
                 .skip(1)
                 .doOnNext(charSequence -> {
@@ -106,11 +101,12 @@ public class ActivityTranslator extends AppCompatActivity implements LanguagePic
                     }
                 })
                 .debounce(350, TimeUnit.MILLISECONDS)
-                .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), lang))
+                .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), Languages.getInstance().getTranslationDirection()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TranslateResult>() {
                     @Override
-                    public void onCompleted() {}
+                    public void onCompleted() {
+                    }
 
                     @Override
                     public void onError(Throwable e) {

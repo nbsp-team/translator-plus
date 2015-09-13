@@ -1,4 +1,4 @@
-package com.nbsp.translator.ui.main.activity;
+package com.nbsp.translator.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,13 @@ import android.widget.LinearLayout;
 
 import com.nbsp.translator.R;
 import com.nbsp.translator.models.TranslationDirection;
-import com.nbsp.translator.ui.translator.activity.ActivityTranslator;
+import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ActivityMain extends AppCompatActivity implements LanguagePicker.OnLanguagePickerEventsListener {
+public class ActivityMain extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
 
     @Bind(R.id.language_input_container)
     protected LinearLayout mLanguageInput;

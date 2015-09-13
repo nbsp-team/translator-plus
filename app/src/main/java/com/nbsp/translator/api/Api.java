@@ -1,10 +1,15 @@
 package com.nbsp.translator.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.nbsp.translator.api.request.YandexTranslator;
 import com.nbsp.translator.exception.network.ConnectionException;
 import com.nbsp.translator.exception.network.AuthException;
+import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
+
+import java.util.List;
 
 import retrofit.RestAdapter;
 import retrofit.android.AndroidLog;
@@ -62,5 +67,9 @@ public class Api {
 
     public Observable<TranslateResult> translate(String text, TranslationDirection lang) {
         return mYandexTranslator.translate(text, lang);
+    }
+
+    public Observable<List<Language>> getLanguages(String lang) {
+        return mYandexTranslator.getLanguages(lang);
     }
 }
