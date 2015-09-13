@@ -56,7 +56,7 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="14dp"
-                android:src="@mipmap/ic_close_black"
+                android:src="@drawable/ic_close_black"
                 />
 
         </LinearLayout>

@@ -39,7 +39,7 @@
             android:layout_height="36dp"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
-            android:src="@mipmap/ic_circle_arrow_right"/>
+            android:src="@drawable/ic_circle_arrow_right"/>
 
     </LinearLayout>
 

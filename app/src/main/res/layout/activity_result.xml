@@ -48,13 +48,15 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="24dp"
+                android:background="@drawable/bg_clickable_blue"
+                android:clickable="true"
                 >
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_volume_up_black"
+                    android:src="@drawable/ic_volume_up_black"
                     />
 
                 <TextView
@@ -77,7 +79,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginStart="12dp"
-                android:src="@mipmap/ic_close_black"
+                android:src="@drawable/ic_close_black"
                 />
 
         </LinearLayout>
@@ -122,14 +124,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-
+                    android:background="@drawable/bg_clickable_blue"
+                    android:clickable="true"
                     >
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/ic_volume_up_white"
+                        android:src="@drawable/ic_volume_up_white"
                         />
 
                     <TextView
