@@ -13,5 +13,7 @@
         android:textColor="@color/white"
         android:layout_centerVertical="true"
         android:textSize="18sp"
+        android:singleLine="true"
+        android:maxLines="1"
         />
 </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.nbsp.translator.api;
 
-import android.content.Context;
-
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslationDirection;
 
@@ -13,6 +11,7 @@ import java.util.List;
  */
 
 public class Languages {
+    private static final String[] LANGUAGES = {"ru", "en", "be", "da", "de", "fr", "ja", "uk", "zh", "az"};
     private static Languages ourInstance = new Languages();
     private List<Language> mLanguages;
     private TranslationDirection mTranslationDirection;
@@ -23,15 +22,9 @@ public class Languages {
 
     private Languages() {
         mLanguages = new ArrayList<>();
-        mLanguages.add(new Language("ru"));
-        mLanguages.add(new Language("en"));
-        mLanguages.add(new Language("be"));
-        mLanguages.add(new Language("da"));
-        mLanguages.add(new Language("de"));
-        mLanguages.add(new Language("fr"));
-        mLanguages.add(new Language("ja"));
-        mLanguages.add(new Language("uk"));
-        mLanguages.add(new Language("zh"));
+        for(String lang : LANGUAGES) {
+            mLanguages.add(new Language(lang));
+        }
 
         // Default direction
         // TODO: detect current language
