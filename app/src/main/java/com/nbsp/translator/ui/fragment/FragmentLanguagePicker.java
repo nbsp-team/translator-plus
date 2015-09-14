@@ -17,6 +17,7 @@ import com.nbsp.translator.R;
 import com.nbsp.translator.api.Languages;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.ui.adapter.LanguagePickerAdapter;
 
 import java.util.List;
 
