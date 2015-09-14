@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -20,11 +19,15 @@ import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.ui.adapter.LanguagePickerAdapter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Subscriber;
 
 public class FragmentLanguagePicker extends Fragment {
+    public static final int MAGIC_CONSTANT = 34;
     private OnLanguagePickerEventsListener mListener;
 
     @Bind(R.id.language_from)
@@ -35,6 +38,7 @@ public class FragmentLanguagePicker extends Fragment {
 
     @Bind(R.id.btn_swap)
     protected View mSwapButton;
+    private Subscriber<? super TranslationDirection> mDirectionChangedSubscriber;
 
     public static FragmentLanguagePicker newInstance() {
         return new FragmentLanguagePicker();
@@ -117,7 +121,6 @@ public class FragmentLanguagePicker extends Fragment {
             public void onAnimationEnd(Animation animation) {
                 Languages.getInstance().getTranslationDirection().swap();
                 loadDirection();
-                onDirectionChanged();
 
                 mFromSpinner.startAnimation(fadeInLeft);
                 mToSpinner.startAnimation(fadeInRight);
@@ -154,22 +157,34 @@ public class FragmentLanguagePicker extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnLanguagePickerEventsListener");
         }
+
+        mListener.onCreateChangeObservable(Observable.create(new Observable.OnSubscribe<TranslationDirection>() {
+            @Override
+            public void call(Subscriber<? super TranslationDirection> subscriber) {
+                mDirectionChangedSubscriber = subscriber;
+            }
+        }).debounce(MAGIC_CONSTANT, TimeUnit.MILLISECONDS));
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        if (mDirectionChangedSubscriber != null) {
+            mDirectionChangedSubscriber.onCompleted();
+        }
         mListener = null;
     }
 
     private void onDirectionChanged() {
-        mListener.onTranslationDirectionChanged(
-                Languages.getInstance().getTranslationDirection()
-        );
+        if (mDirectionChangedSubscriber != null) {
+            mDirectionChangedSubscriber.onNext(
+                    Languages.getInstance().getTranslationDirection()
+            );
+        }
     }
 
     public interface OnLanguagePickerEventsListener {
-        void onTranslationDirectionChanged(TranslationDirection direction);
+        void onCreateChangeObservable(Observable<TranslationDirection> observable);
     }
 
 }

@@ -8,6 +8,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,9 +30,12 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by Dimorinny on 10.09.15.
@@ -100,7 +104,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
                 .skip(1)
                 .doOnNext(charSequence -> {
                     if (charSequence.length() != 0) {
-                        setResultBarStatusLoading();
+                        ActivityTranslator.this.setResultBarStatusLoading();
                     }
                 })
                 .debounce(350, TimeUnit.MILLISECONDS)
@@ -159,7 +163,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
     }
 
     @Override
-    public void onTranslationDirectionChanged(TranslationDirection direction) {
+    public void onCreateChangeObservable(Observable<TranslationDirection> observable) {
 
     }
 }

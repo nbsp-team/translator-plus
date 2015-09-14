@@ -13,6 +13,7 @@ import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observable;
 
 public class ActivityResult extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
 
@@ -68,7 +69,7 @@ public class ActivityResult extends AppCompatActivity implements FragmentLanguag
     }
 
     @Override
-    public void onTranslationDirectionChanged(TranslationDirection direction) {
+    public void onCreateChangeObservable(Observable<TranslationDirection> observable) {
 
     }
 }

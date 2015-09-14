@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,6 +17,8 @@ import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
 
 public class ActivityMain extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
 
@@ -47,7 +50,22 @@ public class ActivityMain extends AppCompatActivity implements FragmentLanguageP
     }
 
     @Override
-    public void onTranslationDirectionChanged(TranslationDirection direction) {
+    public void onCreateChangeObservable(Observable<TranslationDirection> observable) {
+        observable.subscribe(new Subscriber<TranslationDirection>() {
+            @Override
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(TranslationDirection translationDirection) {
+                Log.d("ActivityTranslator", "newdirection");
+            }
+        });
     }
 }
