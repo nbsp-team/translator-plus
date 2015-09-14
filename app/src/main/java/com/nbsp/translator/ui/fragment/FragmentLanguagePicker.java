@@ -171,6 +171,7 @@ public class FragmentLanguagePicker extends Fragment {
         super.onDetach();
         if (mDirectionChangedSubscriber != null) {
             mDirectionChangedSubscriber.onCompleted();
+            mDirectionChangedSubscriber = null;
         }
         mListener = null;
     }
