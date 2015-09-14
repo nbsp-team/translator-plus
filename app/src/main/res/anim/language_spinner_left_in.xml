@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:duration="@integer/language_picker_animation_half_duration"
+        android:fromAlpha="@dimen/language_picker_min_alpha"
+        android:toAlpha="1" />
+    <translate
+        android:duration="@integer/language_picker_animation_half_duration"
+        android:fromXDelta="@integer/language_picker_translate"
+        android:toXDelta="0" />
+</set>

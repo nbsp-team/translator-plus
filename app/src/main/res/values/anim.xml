@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Language picker swap animation -->
+    <integer name="language_picker_animation_duration">300</integer>
+    <integer name="language_picker_animation_half_duration">150</integer>
+    <integer name="language_picker_translate">150</integer>
+    <integer name="language_picker_translate_negative">-150</integer>
+    <item name="language_picker_min_alpha" format="float" type="dimen">0.3</item>
+</resources>

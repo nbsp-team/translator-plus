@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -56,6 +58,16 @@ public class FragmentLanguagePicker extends Fragment {
         mFromSpinner.setAdapter(fromAdapter);
         mToSpinner.setAdapter(toAdapter);
 
+        bindSpinners();
+
+        mSwapButton.setOnClickListener(v -> swapLanguages());
+
+        loadDirection();
+
+        return view;
+    }
+
+    private void bindSpinners() {
         mFromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -83,16 +95,40 @@ public class FragmentLanguagePicker extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
 
-        mSwapButton.setOnClickListener(v -> {
-            Languages.getInstance().getTranslationDirection().swap();
-            loadDirection();
-            onDirectionChanged();
+    private void swapLanguages() {
+        Animation rotateButton = AnimationUtils.loadAnimation(getActivity(), R.anim.language_swap_rotate);
+        Animation fadeOutLeft = AnimationUtils.loadAnimation(getActivity(), R.anim.language_spinner_left_out);
+        Animation fadeOutRight = AnimationUtils.loadAnimation(getActivity(), R.anim.language_spinner_right_out);
+        Animation fadeInLeft = AnimationUtils.loadAnimation(getActivity(), R.anim.language_spinner_left_in);
+        Animation fadeInRight = AnimationUtils.loadAnimation(getActivity(), R.anim.language_spinner_right_in);
+
+        mSwapButton.startAnimation(rotateButton);
+
+        fadeOutLeft.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Languages.getInstance().getTranslationDirection().swap();
+                loadDirection();
+                onDirectionChanged();
+
+                mFromSpinner.startAnimation(fadeInLeft);
+                mToSpinner.startAnimation(fadeInRight);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
         });
-
-        loadDirection();
-
-        return view;
+        mFromSpinner.startAnimation(fadeOutLeft);
+        mToSpinner.startAnimation(fadeOutRight);
     }
 
     @Override
