@@ -49,6 +49,10 @@ public class TranslateResultBar {
         mIsStatusWaiting = false;
     }
 
+    public void setHint(String text) {
+        mTranslateResultTextView.setHint(text);
+    }
+
     public String getCurrentResult() {
         return mCurrentResult;
     }

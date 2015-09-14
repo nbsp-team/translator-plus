@@ -60,13 +60,13 @@
                     />
 
                 <TextView
+                    android:id="@+id/result_language_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="14sp"
                     android:layout_marginStart="2dp"
                     android:textColor="@color/black"
-                    android:text="РУССКИЙ"
                     />
 
             </LinearLayout>
@@ -85,12 +85,13 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/result_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:textColor="@color/black"
             android:textSize="19sp"
-            android:text="Исходный текст"/>
+            />
 
     </LinearLayout>
 
@@ -136,13 +137,13 @@
                         />
 
                     <TextView
+                        android:id="@+id/result_language_to"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
                         android:layout_gravity="center"
                         android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:text="АНГЛИЙСКИЙ"
                         />
 
                 </LinearLayout>
@@ -157,12 +158,13 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/result_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:textColor="@color/white"
                 android:textSize="19sp"
-                android:text="Результат перевода"/>
+                />
 
         </LinearLayout>
 
