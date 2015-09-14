@@ -1,4 +1,4 @@
-package com.nbsp.translator.ui.fragment;
+package com.nbsp.translator.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
