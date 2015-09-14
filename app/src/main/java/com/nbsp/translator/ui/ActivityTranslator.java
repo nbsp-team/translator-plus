@@ -8,7 +8,6 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,14 +16,12 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Api;
 import com.nbsp.translator.api.Languages;
-import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import com.nbsp.translator.ui.widget.TranslateResultBar;
 import com.nbsp.translator.widget.EditTextBackEvent;
 
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
@@ -32,10 +29,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * Created by Dimorinny on 10.09.15.

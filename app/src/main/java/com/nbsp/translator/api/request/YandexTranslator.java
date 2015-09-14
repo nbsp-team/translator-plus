@@ -13,6 +13,7 @@ import rx.Observable;
 /**
  * Created by Dimorinny on 10.09.15.
  */
+
 public interface YandexTranslator {
 
     @GET("/translate")

@@ -131,6 +131,7 @@ public class FragmentLanguagePicker extends Fragment {
 
             }
         });
+
         mFromSpinner.startAnimation(fadeOutLeft);
         mToSpinner.startAnimation(fadeOutRight);
     }
@@ -163,7 +164,7 @@ public class FragmentLanguagePicker extends Fragment {
             public void call(Subscriber<? super TranslationDirection> subscriber) {
                 mDirectionChangedSubscriber = subscriber;
             }
-        }).debounce(MAGIC_CONSTANT, TimeUnit.MILLISECONDS));
+        }).debounce(MAGIC_CONSTANT, TimeUnit.MILLISECONDS).skip(1));
     }
 
     @Override

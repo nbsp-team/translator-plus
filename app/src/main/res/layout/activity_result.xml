@@ -25,7 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/language_input_container"
+        android:id="@+id/container_language_from"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/start_language_input_height"
@@ -74,12 +74,13 @@
 
             <ImageView
                 android:id="@+id/close_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="14dp"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_close_black"
+                android:clickable="true"
+                android:background="@drawable/bg_clickable_circle"
                 />
 
         </LinearLayout>
@@ -95,81 +96,94 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:layout_gravity="center"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
-        android:elevation="1dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardBackgroundColor="?attr/colorPrimary">
+        android:layout_marginTop="12dp">
 
-
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v7.widget.CardView
+            android:id="@+id/container_language_to"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/start_language_input_height"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:elevation="1dp"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardBackgroundColor="?attr/colorPrimary">
+
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/start_language_input_height"
                 >
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@drawable/bg_clickable_blue"
-                    android:clickable="true"
                     >
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_volume_up_white"
-                        />
-
-                    <TextView
-                        android:id="@+id/result_language_to"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"
+                        android:padding="16dp"
+                        android:background="@drawable/bg_clickable_blue"
+                        android:clickable="true"
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_volume_up_white"
+                            />
+
+                        <TextView
+                            android:id="@+id/result_language_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_gravity="center"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
                         />
 
                 </LinearLayout>
 
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_margin="8dp"
+                <TextView
+                    android:id="@+id/result_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
                     />
 
             </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <TextView
-                android:id="@+id/result_to"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textColor="@color/white"
-                android:textSize="19sp"
-                />
+        <ProgressBar
+            android:id="@+id/loading_progress_bar"
+            android:visibility="gone"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="42dp"
+            android:layout_gravity="center_horizontal"
+            />
 
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
-
+    </FrameLayout>
 
 </LinearLayout>
