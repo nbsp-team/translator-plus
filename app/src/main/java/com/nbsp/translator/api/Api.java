@@ -16,7 +16,6 @@ import retrofit.android.AndroidLog;
 import rx.Observable;
 
 
-
 /**
  * Created by Dimorinny on 10.09.15.
  */

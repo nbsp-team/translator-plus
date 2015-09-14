@@ -68,6 +68,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
         setResultBarClickListener();
         setLanguageBarBackListener();
         disableBlinking();
+        initHints();
 
         mTranslateSubscription = getTranslateSubscription();
     }
@@ -81,12 +82,14 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
     protected void startResultActivityWithAnimation() {
 
         Intent intent = new Intent(getApplicationContext(), ActivityResult.class);
+        intent.putExtra(ActivityResult.ARG_RESULT_FROM, mLanguageEditText.getText().toString());
+        intent.putExtra(ActivityResult.ARG_RESULT_TO, mTranslateResultBar.getCurrentResult());
 
-        Pair<View, String> p1 = Pair.create((View) mLanguagesBar, mLanguagesBar.getTransitionName());
+//        Pair<View, String> p1 = Pair.create((View) mLanguagesBar, mLanguagesBar.getTransitionName());
         Pair<View, String> p2 = Pair.create((View) mLanguageContainer, mLanguageContainer.getTransitionName());
 
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(ActivityTranslator.this, p1, p2);
+                .makeSceneTransitionAnimation(ActivityTranslator.this, p2);
 
         ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
     }
@@ -118,6 +121,11 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
                         mTranslateResultBar.setCurrentResult(translateResult.getTexts().get(0));
                     }
                 });
+    }
+
+    private void initHints() {
+        mLanguageEditText.setHint(Languages.getInstance().getTranslationDirection().getFrom().getName());
+        mTranslateResultBar.setHint(Languages.getInstance().getTranslationDirection().getTo().getName());
     }
 
     private void setLanguageBarBackListener() {
