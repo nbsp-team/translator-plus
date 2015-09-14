@@ -50,7 +50,7 @@ public class LanguagePickerAdapter extends BaseAdapter {
             view.setTag(DROPDOWN);
         }
 
-        TextView textView = (TextView) view.findViewById(R.id.text1);
+        TextView textView = (TextView) view.findViewById(R.id.language);
         textView.setText(getTitle(position));
 
         return view;
@@ -64,7 +64,7 @@ public class LanguagePickerAdapter extends BaseAdapter {
             view.setTag(NON_DROPDOWN);
         }
 
-        TextView textView = (TextView) view.findViewById(R.id.text1);
+        TextView textView = (TextView) view.findViewById(R.id.language);
         textView.setText(getTitle(position));
 
         return view;
