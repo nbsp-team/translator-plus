@@ -134,8 +134,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
     private Observable<CharSequence> getLangEditTextSubscription() {
         return RxTextView.textChanges(mLanguageEditText)
                 .skip(1)
-                .debounce(350, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread());
+                .debounce(350, TimeUnit.MILLISECONDS);
     }
 
     private Subscription getTranslateSubscription() {
@@ -146,6 +145,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
                     }
                 })
                 .switchMap(charSequence -> Api.getInstance().translate(charSequence.toString(), Languages.getInstance().getTranslationDirection()))
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TranslateResult>() {
                     @Override
                     public void onCompleted() {
@@ -166,6 +166,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
     private Subscription getDetectLanguageSubscription() {
         return getLangEditTextSubscription()
                 .switchMap(charSequence -> Api.getInstance().detectLanguage(charSequence.toString()))
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Language>() {
                     @Override
                     public void onCompleted() {
@@ -178,13 +179,14 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
 
                     @Override
                     public void onNext(Language lang) {
-                        if(lang.getYandexCode().length() != 0 &&
-                                Languages.getInstance().getTranslationDirection().getFrom() != lang) {
+                        if (lang.getYandexCode().length() != 0 &&
+                                !Languages.getInstance().getTranslationDirection().getFrom().getYandexCode()
+                                        .equals(lang.getYandexCode())) {
                             runOnUiThread(() -> {
                                         makeDidYouMeanText(lang);
                                         mDidYouMeanText.setVisibility(View.VISIBLE);
                                     }
-                                );
+                            );
                         } else {
                             runOnUiThread(() -> mDidYouMeanText.setVisibility(View.GONE));
                         }
