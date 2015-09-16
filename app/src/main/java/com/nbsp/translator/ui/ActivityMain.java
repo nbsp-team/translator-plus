@@ -68,4 +68,10 @@ public class ActivityMain extends AppCompatActivity implements FragmentLanguageP
             }
         });
     }
+
+    @OnClick(R.id.main_bottom_button_image)
+    protected void captureImage() {
+        Intent i = new Intent(this, ActivityImageAnalyze.class);
+        startActivity(i);
+    }
 }
