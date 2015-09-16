@@ -1,10 +1,8 @@
 package com.nbsp.translator.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.nbsp.translator.api.request.YandexTranslator;
-import com.nbsp.translator.exception.network.ConnectionException;
 import com.nbsp.translator.exception.network.AuthException;
+import com.nbsp.translator.exception.network.ConnectionException;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;

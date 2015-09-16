@@ -200,7 +200,6 @@ public class ActivityResult extends AppCompatActivity implements FragmentLanguag
 
     @Override
     public void onBackPressed() {
-
         Bundle bundle = new Bundle();
         bundle.putString(ARG_RESULT_CHANGED, mResultTo.getText().toString());
 
