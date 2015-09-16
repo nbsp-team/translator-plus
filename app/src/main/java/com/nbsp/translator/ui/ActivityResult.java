@@ -32,6 +32,7 @@ public class ActivityResult extends AppCompatActivity implements FragmentLanguag
 
     public static final String ARG_RESULT_FROM = "arg_result_from";
     public static final String ARG_RESULT_TO = "arg_result_to";
+    public static final String ARG_RESULT_CHANGED = "arg_result_changed";
 
     @Bind(R.id.result_language_from)
     protected TextView mLanguageFrom;
@@ -195,5 +196,19 @@ public class ActivityResult extends AppCompatActivity implements FragmentLanguag
             mLanguageChangedSubscription.unsubscribe();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_RESULT_CHANGED, mResultTo.getText().toString());
+
+        Intent mIntent = new Intent();
+        mIntent.putExtras(bundle);
+
+        setResult(RESULT_OK, mIntent);
+
+        super.onBackPressed();
     }
 }

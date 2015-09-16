@@ -8,6 +8,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +38,8 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 
 public class ActivityTranslator extends AppCompatActivity implements FragmentLanguagePicker.OnLanguagePickerEventsListener {
+
+    private final int REQUEST_CODE_RESULT_CHANGED = 228;
 
     @Bind(R.id.languages_bar)
     protected LinearLayout mLanguagesBar;
@@ -90,7 +93,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(ActivityTranslator.this, p2);
 
-        ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+        ActivityCompat.startActivityForResult(this, intent, REQUEST_CODE_RESULT_CHANGED, activityOptions.toBundle());
     }
 
 
@@ -160,5 +163,19 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
     @Override
     public void onCreateChangeObservable(Observable<TranslationDirection> observable) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_RESULT_CHANGED:
+                    String newResult = data.getStringExtra(ActivityResult.ARG_RESULT_CHANGED);
+                    if (newResult != null) {
+                        mTranslateResultBar.setCurrentResult(newResult);
+                    }
+                    break;
+            }
+        }
     }
 }
