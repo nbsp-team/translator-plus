@@ -94,7 +94,7 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentLan
         mDidYouMeanText.setLinksClickable(true);
         mDidYouMeanText.setMovementMethod(LinkMovementMethod.getInstance());
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        String didYouMean = getString(R.string.did_you_mean);
+        String didYouMean = getString(R.string.did_you_mean) + " ";
         builder.append(didYouMean);
         String name = lang.getName();
         builder.append(name);
