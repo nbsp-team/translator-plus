@@ -69,4 +69,8 @@ public class Api {
     public Observable<List<Language>> getLanguages(String lang) {
         return mYandexTranslator.getLanguages(lang);
     }
+
+    public Observable<Language> detectLanguage(String text) {
+        return mYandexTranslator.detect(text);
+    }
 }

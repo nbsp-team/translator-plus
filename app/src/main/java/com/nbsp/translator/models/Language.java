@@ -1,5 +1,7 @@
 package com.nbsp.translator.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -8,25 +10,28 @@ import java.util.Locale;
  */
 
 public class Language implements Serializable {
-    private Locale locale;
+//    private Locale locale;
+
+    @SerializedName("lang")
+    private String code;
 
     public Language(String code) {
-        this.locale = new Locale(code);
+        this.code = code;
     }
 
     public String getName() {
-        return locale.getDisplayName(Locale.getDefault());
+        return getLocale().getDisplayName(Locale.getDefault());
     }
 
     public String getYandexCode() {
-        return locale.toLanguageTag();
+        return code;
     }
 
     public Locale getLocale() {
-        return locale;
+        return Locale.forLanguageTag(code);
     }
 
     public String getLanguageCode() {
-        return locale.toLanguageTag();
+        return code;
     }
 }

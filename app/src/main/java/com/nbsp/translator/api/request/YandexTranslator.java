@@ -21,4 +21,7 @@ public interface YandexTranslator {
 
     @GET("/getLangs")
     Observable<List<Language>> getLanguages(@Query("ui") String lang);
+
+    @GET("/detect")
+    Observable<Language> detect(@Query("text") String text);
 }
