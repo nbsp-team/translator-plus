@@ -24,6 +24,7 @@
 
     <style name="Widget.AppTheme.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
         <item name="android:theme">@style/ToolBarThemeOverlay</item>
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
