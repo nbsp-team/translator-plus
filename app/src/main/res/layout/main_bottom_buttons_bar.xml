@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    >
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+    <ImageButton
+        android:id="@+id/main_bottom_button_mic"
+        android:layout_width="@dimen/main_bottom_button_size"
+        android:layout_height="@dimen/main_bottom_button_size"
+        android:src="@drawable/ic_mic_black_36dp"
+        style="@style/MainBottomButton"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+    <ImageButton
+        android:id="@+id/main_bottom_button_image"
+        android:layout_width="@dimen/main_bottom_button_size"
+        android:layout_height="@dimen/main_bottom_button_size"
+        android:src="@drawable/ic_camera_alt_black_36dp"
+        style="@style/MainBottomButton"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+
+    <ImageButton
+        android:id="@+id/main_bottom_button"
+        android:layout_width="@dimen/main_bottom_button_size"
+        android:layout_height="@dimen/main_bottom_button_size"
+        android:src="@drawable/ic_mic_black_36dp"
+        style="@style/MainBottomButton"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" >
+    </Space>
+</LinearLayout>
