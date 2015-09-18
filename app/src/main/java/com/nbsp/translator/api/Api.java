@@ -6,6 +6,7 @@ import com.nbsp.translator.exception.network.ConnectionException;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.models.TranslationTask;
 
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class Api {
         mYandexTranslator = mRestAdapter.create(YandexTranslator.class);
     }
 
-    public Observable<TranslateResult> translate(String text, TranslationDirection lang) {
-        return mYandexTranslator.translate(text, lang);
+    public Observable<TranslateResult> translate(TranslationTask task) {
+        return mYandexTranslator.translate(task.getTextToTranslate(), task.getTranslationDirection());
     }
 
     public Observable<List<Language>> getLanguages(String lang) {

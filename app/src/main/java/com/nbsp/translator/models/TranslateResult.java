@@ -37,4 +37,12 @@ public class TranslateResult {
     public List<String> getTexts() {
         return mTexts;
     }
+
+    public String getText() {
+        if (mTexts.size() > 0) {
+            return mTexts.get(0);
+        } else {
+            return "";
+        }
+    }
 }

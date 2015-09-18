@@ -6,7 +6,7 @@
 
     <string name="transition_toolbar">transition_toolbar</string>
     <string name="transition_language_text_edit">transition_language_text_edit</string>
-    <string name="enter_text">Введите текст</string>
+    <string name="enter_original_text_hint">Введите текст</string>
     <string name="swap_languages">Поменять местами</string>
 
 <!-- TODO: Remove or change this placeholder text -->
