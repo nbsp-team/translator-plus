@@ -84,6 +84,7 @@ public class ActivityEditText extends AppCompatActivity {
 
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mOriginalEditText)
+                .skip(1)
                 .doOnNext(charSequence -> {
                     if (charSequence.length() != 0) {
                         ActivityEditText.this.setResultBarStatusLoading();
