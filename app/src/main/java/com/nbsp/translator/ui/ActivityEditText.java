@@ -33,7 +33,6 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class ActivityEditText extends AppCompatActivity {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
-    private final int REQUEST_CODE_RESULT_CHANGED = 228;
 
     @Bind(R.id.language_edit_text)
     protected EditTextBackEvent mOriginalEditText;
@@ -45,7 +44,7 @@ public class ActivityEditText extends AppCompatActivity {
     protected LinearLayout mResultContainer;
 
     @Bind(R.id.close_button)
-    protected ImageView mCloseButton;
+    protected ImageView mClearButton;
 
     private TranslateResultBar mTranslateResultBar;
     private Subscription mTranslateSubscription;

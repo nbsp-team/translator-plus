@@ -2,24 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/languages_bar"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:transitionName="@string/transition_toolbar"
-        >
-        <fragment
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:name="com.nbsp.translator.ui.fragment.FragmentLanguagePicker"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/language_picker">
-        </fragment>
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/language_edit_text_container"
         android:layout_width="match_parent"
