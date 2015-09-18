@@ -68,6 +68,7 @@ public class ActivityTranslator extends AppCompatActivity {
     @OnClick(R.id.original_text_input)
     protected void openEditTextWithAnimation() {
         Intent intent = new Intent(getApplicationContext(), ActivityEditText.class);
+        intent.putExtra(ActivityEditText.ORIGINAL_TEXT_EXTRA, mOriginalTextInput.getText());
 
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 ActivityTranslator.this,
@@ -76,7 +77,6 @@ public class ActivityTranslator extends AppCompatActivity {
         );
 
         ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
-
     }
 
     @Override
