@@ -16,7 +16,7 @@ import com.nbsp.translator.api.Api;
 import com.nbsp.translator.models.TranslateResult;
 import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.ui.widget.TranslateResultBar;
-import com.nbsp.translator.widget.EditTextBackEvent;
+import com.nbsp.translator.ui.widget.EditTextBackEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -78,7 +78,7 @@ public class ActivityEditText extends AppCompatActivity {
 
     protected void setTextResult() {
         Intent intent = new Intent();
-        intent.putExtra("text", mOriginalEditText.getText().toString());
+        intent.putExtra(ActivityTranslator.ORIGINAL_TEXT_EXTRA, mOriginalEditText.getText().toString());
         setResult(RESULT_OK, intent);
         finish();
     }

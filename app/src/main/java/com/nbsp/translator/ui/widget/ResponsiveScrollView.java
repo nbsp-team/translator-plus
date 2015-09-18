@@ -1,4 +1,4 @@
-package com.nbsp.translator.widget;
+package com.nbsp.translator.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

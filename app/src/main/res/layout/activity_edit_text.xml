@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <com.nbsp.translator.widget.EditTextBackEvent
+            <com.nbsp.translator.ui.widget.EditTextBackEvent
                 android:id="@+id/language_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="80dp"

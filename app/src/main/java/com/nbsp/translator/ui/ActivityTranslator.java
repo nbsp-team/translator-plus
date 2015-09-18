@@ -76,7 +76,8 @@ public class ActivityTranslator extends AppCompatActivity {
                 mLanguageInputContainer.getTransitionName()
         );
 
-        ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+        ActivityCompat.startActivityForResult(this, intent,
+                EDIT_TEXT_ACTIVITY_REQUEST_CODE, activityOptions.toBundle());
     }
 
     @Override
