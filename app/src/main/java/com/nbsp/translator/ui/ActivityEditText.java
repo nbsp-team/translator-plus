@@ -79,12 +79,10 @@ public class ActivityEditText extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(ActivityTranslator.ORIGINAL_TEXT_EXTRA, mOriginalEditText.getText().toString());
         setResult(RESULT_OK, intent);
-        finish();
     }
 
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mOriginalEditText)
-                .skip(1)
                 .doOnNext(charSequence -> {
                     if (charSequence.length() != 0) {
                         ActivityEditText.this.setResultBarStatusLoading();
@@ -123,6 +121,7 @@ public class ActivityEditText extends AppCompatActivity {
         mTranslateResultBar.setOnCLickListener(view -> {
             if (mTranslateResultBar.getCurrentResult().length() != 0) {
                 setTextResult();
+                finish();
             }
         });
     }
