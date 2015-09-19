@@ -26,6 +26,8 @@ import butterknife.OnClick;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by Dimorinny on 10.09.15.
@@ -78,10 +80,12 @@ public class ActivityEditText extends AppCompatActivity {
     private Subscription getTranslateSubscription() {
         return RxTextView.textChanges(mOriginalEditText)
                 .doOnNext(charSequence -> {
-                    if (charSequence.length() != 0) {
-                        ActivityEditText.this.setResultBarStatusLoading();
+                    if (charSequence.length() == 0) {
+                        mTranslateResultBar.setCurrentResult("");
                     }
                 })
+                .filter(charSequence -> charSequence.length() != 0)
+                .doOnNext(charSequence -> setResultBarStatusLoading())
                 .debounce(350, TimeUnit.MILLISECONDS)
                 .switchMap(charSequence -> Api.getInstance().translate(new TranslationTask(charSequence.toString(), App.getInstance().getTranslationDirection())))
                 .observeOn(AndroidSchedulers.mainThread())
