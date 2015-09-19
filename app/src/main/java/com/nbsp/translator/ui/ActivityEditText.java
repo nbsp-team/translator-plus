@@ -72,13 +72,7 @@ public class ActivityEditText extends AppCompatActivity {
 
     @OnClick(R.id.close_button)
     protected void onCloseClicked(View view) {
-        onBackPressed();
-    }
-
-    protected void setTextResult() {
-        Intent intent = new Intent();
-        intent.putExtra(ActivityTranslator.ORIGINAL_TEXT_EXTRA, mOriginalEditText.getText().toString());
-        setResult(RESULT_OK, intent);
+        mOriginalEditText.setText("");
     }
 
     private Subscription getTranslateSubscription() {
@@ -120,8 +114,7 @@ public class ActivityEditText extends AppCompatActivity {
     private void setResultBarClickListener() {
         mTranslateResultBar.setOnCLickListener(view -> {
             if (mTranslateResultBar.getCurrentResult().length() != 0) {
-                setTextResult();
-                finish();
+                onBackPressed();
             }
         });
     }
@@ -136,6 +129,17 @@ public class ActivityEditText extends AppCompatActivity {
         fade.excludeTarget(android.R.id.navigationBarBackground, true);
         getWindow().setExitTransition(fade);
         getWindow().setEnterTransition(fade);
+    }
+
+
+    // Юзаем onBackPressed, потому что с finish() ломается анимация
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(ActivityTranslator.ORIGINAL_TEXT_EXTRA, mOriginalEditText.getText().toString());
+        setResult(RESULT_OK, intent);
+
+        super.onBackPressed();
     }
 
     @Override
