@@ -15,7 +15,9 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/original_text_input_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/original_text_input_height"
+                android:paddingBottom="16dp"
                 >
                 <LinearLayout
                     android:orientation="horizontal"

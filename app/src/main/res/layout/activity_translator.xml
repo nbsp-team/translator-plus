@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:overScrollMode="never"
     >
     <LinearLayout
         android:orientation="vertical"
@@ -40,7 +39,8 @@
             <EditText
                 android:id="@+id/original_text_input"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/original_text_input_height"
+                android:minHeight="@dimen/original_text_input_height"
+                android:layout_height="wrap_content"
                 android:gravity="top"
                 android:textSize="22sp"
                 android:paddingTop="16dp"
