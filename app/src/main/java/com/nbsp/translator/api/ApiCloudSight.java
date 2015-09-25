@@ -42,9 +42,7 @@ public class ApiCloudSight {
     private void initRestAdapter() {
         mRestAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
-                .setRequestInterceptor(request -> {
-                    request.addHeader("Authorization", "CloudSight " + API_KEY);
-                })
+                .setRequestInterceptor(request -> request.addHeader("Authorization", "CloudSight " + API_KEY))
                 .setErrorHandler(cause -> {
                     switch(cause.getKind()) {
                         case NETWORK:

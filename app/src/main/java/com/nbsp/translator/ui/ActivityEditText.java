@@ -1,11 +1,13 @@
 package com.nbsp.translator.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -58,6 +60,7 @@ public class ActivityEditText extends AppCompatActivity {
         if (getIntent() != null) {
             String text = getIntent().getExtras().getString(ORIGINAL_TEXT_EXTRA);
             mOriginalEditText.setText(text);
+            mOriginalEditText.setSelection(mOriginalEditText.getText().length());
         }
 
         mTranslateResultBar = new TranslateResultBar(mResultContainer);
@@ -140,6 +143,9 @@ public class ActivityEditText extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(ActivityTranslator.ORIGINAL_TEXT_EXTRA, mOriginalEditText.getText().toString());
         setResult(RESULT_OK, intent);
+
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mOriginalEditText.getWindowToken(), 0);
 
         super.onBackPressed();
     }

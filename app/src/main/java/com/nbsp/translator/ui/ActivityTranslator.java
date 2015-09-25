@@ -61,6 +61,12 @@ public class ActivityTranslator extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mOriginalTextInput.setSelection(mOriginalTextInput.getText().length());
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mSubscription.unsubscribe();
