@@ -1,10 +1,9 @@
 package com.nbsp.translator;
 
 import com.nbsp.translator.api.Languages;
-import com.nbsp.translator.models.Language;
+import com.nbsp.translator.models.yandextranslator.Language;
 import com.nbsp.translator.models.TranslationDirection;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

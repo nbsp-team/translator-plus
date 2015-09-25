@@ -1,6 +1,6 @@
 package com.nbsp.translator.models;
 
-import android.util.Pair;
+import com.nbsp.translator.models.yandextranslator.Language;
 
 import java.io.Serializable;
 

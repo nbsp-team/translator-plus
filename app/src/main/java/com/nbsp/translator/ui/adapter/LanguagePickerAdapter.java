@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Languages;
-import com.nbsp.translator.models.Language;
+import com.nbsp.translator.models.yandextranslator.Language;
 
 import java.util.List;
 

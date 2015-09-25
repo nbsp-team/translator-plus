@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
-import com.nbsp.translator.api.Api;
-import com.nbsp.translator.models.TranslateResult;
+import com.nbsp.translator.api.ApiTranslator;
+import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.TranslationTask;
 
@@ -58,7 +58,7 @@ public class FragmentTranslationCard extends Fragment {
     public Subscription subscribe(Observable<TranslationTask> observable) {
         return observable.debounce(350, TimeUnit.MILLISECONDS)
                 .doOnNext(translationDirection -> showProgress())
-                .switchMap(task -> Api.getInstance().translate(task))
+                .switchMap(task -> ApiTranslator.getInstance().translate(task))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TranslateResult>() {
                     @Override

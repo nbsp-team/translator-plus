@@ -1,4 +1,4 @@
-package com.nbsp.translator.models;
+package com.nbsp.translator.models.yandextranslator;
 
 import java.io.Serializable;
 import java.util.Locale;

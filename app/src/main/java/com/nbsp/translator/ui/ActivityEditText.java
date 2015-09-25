@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
-import com.nbsp.translator.api.Api;
-import com.nbsp.translator.models.TranslateResult;
+import com.nbsp.translator.api.ApiTranslator;
+import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.ui.widget.TranslateResultBar;
 import com.nbsp.translator.ui.widget.EditTextBackEvent;
@@ -26,8 +26,6 @@ import butterknife.OnClick;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by Dimorinny on 10.09.15.
@@ -87,7 +85,7 @@ public class ActivityEditText extends AppCompatActivity {
                 .filter(charSequence -> charSequence.length() != 0)
                 .doOnNext(charSequence -> setResultBarStatusLoading())
                 .debounce(350, TimeUnit.MILLISECONDS)
-                .switchMap(charSequence -> Api.getInstance().translate(new TranslationTask(charSequence.toString(), App.getInstance().getTranslationDirection())))
+                .switchMap(charSequence -> ApiTranslator.getInstance().translate(new TranslationTask(charSequence.toString(), App.getInstance().getTranslationDirection())))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TranslateResult>() {
                     @Override

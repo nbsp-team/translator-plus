@@ -29,6 +29,7 @@ import rx.Subscription;
 public class ActivityTranslator extends AppCompatActivity {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
     private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
+    private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
 
     @Bind(R.id.toolbar)
     protected View mToolbar;
@@ -82,14 +83,24 @@ public class ActivityTranslator extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == EDIT_TEXT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            mOriginalTextInput.setText(data.getStringExtra(ORIGINAL_TEXT_EXTRA));
+
+        if (resultCode == RESULT_OK) {
+
+            switch (requestCode) {
+                case EDIT_TEXT_ACTIVITY_REQUEST_CODE:
+                    mOriginalTextInput.setText(data.getStringExtra(ORIGINAL_TEXT_EXTRA));
+                    break;
+
+                case ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE:
+                    mOriginalTextInput.setText(data.getStringExtra(ActivityImageAnalyze.ARG_ANALYZE_RESULT));
+                    break;
+            }
         }
     }
 
     @OnClick(R.id.main_bottom_button_image)
     protected void captureImage() {
-        Intent i = new Intent(this, ActivityImageAnalyze.class);
-        startActivity(i);
+        Intent intent = new Intent(this, ActivityCloudSightAnalyze.class);
+        startActivityForResult(intent, ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE);
     }
 }
