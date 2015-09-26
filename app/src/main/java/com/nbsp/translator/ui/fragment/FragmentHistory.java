@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
@@ -30,6 +31,7 @@ public class FragmentHistory extends Fragment {
     @Bind(R.id.history_list)
     protected LinearLayout mHistoryLayout;
     private OnHistoryItemSelectedListener mListener;
+    private Subscription mSubscription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class FragmentHistory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         ButterKnife.bind(this, view);
 
-        History.getLastItems(getActivity(), 25)
+        mSubscription = History.getLastItems(getActivity(), 25)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setHistory);
 
@@ -86,6 +88,7 @@ public class FragmentHistory extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mSubscription.unsubscribe();
     }
 
     public interface OnHistoryItemSelectedListener {
