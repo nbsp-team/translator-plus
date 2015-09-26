@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
@@ -65,7 +68,7 @@ public class ActivityEditText extends AppCompatActivity {
 
         mTranslateResultBar = new TranslateResultBar(mResultContainer);
 
-        setResultBarClickListener();
+        setResultListeners();
         setLanguageBarBackListener();
         disableBlinking();
         initHints();
@@ -116,12 +119,24 @@ public class ActivityEditText extends AppCompatActivity {
         mOriginalEditText.setOnEditTextImeBackListener((ctrl, text) -> onBackPressed());
     }
 
-    private void setResultBarClickListener() {
+    private void setResultListeners() {
         mTranslateResultBar.setOnCLickListener(view -> {
-            if (mTranslateResultBar.getCurrentResult().length() != 0) {
-                onBackPressed();
-            }
+            onResult();
         });
+
+        mOriginalEditText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                onResult();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void onResult() {
+        if (mTranslateResultBar.getCurrentResult().length() != 0) {
+            onBackPressed();
+        }
     }
 
     private void setResultBarStatusLoading() {

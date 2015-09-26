@@ -28,8 +28,11 @@
                 android:focusable="true"
                 android:hint="белорусский"
                 android:paddingStart="16dp"
-                android:inputType="textFilter|textMultiLine"
+                android:inputType="textFilter"
                 android:textSize="20sp"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:maxLines="1"
                 />
 
             <ImageView
