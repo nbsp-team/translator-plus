@@ -111,7 +111,6 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
         if (mAnalyticResultSubscription != null) {
             mAnalyticResultSubscription.unsubscribe();
         }
@@ -129,6 +128,8 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             setPic();
+        } else {
+            finish();
         }
     }
 
