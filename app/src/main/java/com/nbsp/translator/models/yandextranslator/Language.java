@@ -18,10 +18,6 @@ public class Language implements Serializable {
         return locale.getDisplayName(Locale.getDefault());
     }
 
-    public String getYandexCode() {
-        return locale.toLanguageTag();
-    }
-
     public Locale getLocale() {
         return locale;
     }

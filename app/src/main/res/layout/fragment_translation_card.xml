@@ -24,37 +24,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:id="@+id/tts_button"
-                        android:orientation="horizontal"
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/result_language_to"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:padding="16dp"
-                        android:background="@drawable/bg_clickable_blue"
-                        android:clickable="true"
-                        >
+                        />
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_volume_up_white"
-                            />
-
-                        <TextView
-                            android:id="@+id/result_language_to"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="2dp"
-                            android:layout_gravity="center"
-                            android:textSize="14sp"
-                            android:textColor="@color/white"
-                            />
-
-                    </LinearLayout>
+                    <fragment
+                        android:id="@+id/player"
+                        android:name="com.nbsp.translator.ui.fragment.FragmentPlayerButton"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        />
 
                     <ImageButton
                         android:id="@+id/copy_to_button"

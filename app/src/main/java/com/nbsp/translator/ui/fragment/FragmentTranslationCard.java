@@ -6,7 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +47,8 @@ public class FragmentTranslationCard extends Fragment {
     @Bind(R.id.container_language_to)
     protected View mContainerLanguageTo;
 
+    private FragmentPlayerButton mPlayerFragment;
+
     public FragmentTranslationCard() {}
 
     @Override
@@ -60,6 +61,8 @@ public class FragmentTranslationCard extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translation_card, container, false);
         ButterKnife.bind(this, view);
+
+        mPlayerFragment = (FragmentPlayerButton) getChildFragmentManager().findFragmentById(R.id.player);
 
         return view;
     }
@@ -87,15 +90,6 @@ public class FragmentTranslationCard extends Fragment {
                 });
     }
 
-    @OnClick(R.id.tts_button)
-    protected void ttsOnClickHandler(View view) {
-        if (!mResultTo.getText().toString().isEmpty()) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, UrlBuilder.getGoogleTranslateTtlUri(
-                    mResultTo.getText().toString(), App.getInstance().getTranslationDirection().getTo().getYandexCode()));
-            startActivity(browserIntent);
-        }
-    }
-
     @OnClick(R.id.copy_to_button)
     protected void copyResultToClipboard(View view) {
         if (!mResultTo.getText().toString().isEmpty()) {
@@ -107,7 +101,7 @@ public class FragmentTranslationCard extends Fragment {
         }
     }
 
-    private void setContainerToData(String languageName, String result) {
+    private void updateViews(String languageName, String result) {
         mLanguageTo.setText(languageName.toUpperCase());
         mResultTo.setText(result);
     }
@@ -135,7 +129,13 @@ public class FragmentTranslationCard extends Fragment {
 
     private void showResultCard(TranslateResult result) {
         TranslationDirection translationDirection = App.getInstance().getTranslationDirection();
-        setContainerToData(translationDirection.getTo().getName(), result.getText());
+        updateViews(translationDirection.getTo().getName(), result.getText());
+
+        String ttsUrl = UrlBuilder.getGoogleTranslateTtlUri(
+                mResultTo.getText().toString(),
+                App.getInstance().getTranslationDirection().getTo().getLanguageCode()
+        ).toString();
+        mPlayerFragment.setAudioUrl(ttsUrl);
 
         Animation animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fade_in);
         animation.setAnimationListener(new Animation.AnimationListener() {

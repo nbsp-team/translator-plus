@@ -35,7 +35,7 @@ public class TranslationDirection implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s-%s", getFrom().getYandexCode(), getTo().getYandexCode());
+        return String.format("%s-%s", getFrom().getLanguageCode(), getTo().getLanguageCode());
     }
 
     public void swap() {
