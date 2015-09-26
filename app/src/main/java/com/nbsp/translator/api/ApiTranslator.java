@@ -19,6 +19,7 @@ import rx.Observable;
  */
 
 public class ApiTranslator {
+    public static final int ENABLE_LANG_DETECTION = 1;
     private static ApiTranslator instance;
 
     private ApiTranslator() {
@@ -63,7 +64,7 @@ public class ApiTranslator {
     }
 
     public Observable<TranslateResult> translate(TranslationTask task) {
-        return mYandexTranslator.translate(task.getTextToTranslate(), task.getTranslationDirection());
+        return mYandexTranslator.translate(task.getTextToTranslate(), task.getTranslationDirection(), ENABLE_LANG_DETECTION);
     }
 
     public Observable<List<Language>> getLanguages(String lang) {

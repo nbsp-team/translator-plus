@@ -6,10 +6,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -40,7 +36,7 @@ public class ActivityTranslator extends AppCompatActivity {
     @Bind(R.id.original_text_input)
     protected EditText mOriginalTextInput;
 
-    private Subscription mSubscription;
+    private Subscription mTranslationCardSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +49,7 @@ public class ActivityTranslator extends AppCompatActivity {
         Observable<TranslationDirection> languageDirectionObservable = languagePicker.getObservable();
 
         FragmentTranslationCard translationCard = (FragmentTranslationCard) getFragmentManager().findFragmentById(R.id.translation_result_card);
-        mSubscription = translationCard.subscribe(Observable.combineLatest(
+        mTranslationCardSubscription = translationCard.subscribe(Observable.combineLatest(
                 languageDirectionObservable,
                 originalTextObservable,
                 (direction, text) -> new TranslationTask(text, direction)
@@ -69,7 +65,7 @@ public class ActivityTranslator extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mSubscription.unsubscribe();
+        mTranslationCardSubscription.unsubscribe();
     }
 
     @OnClick(R.id.original_text_input)

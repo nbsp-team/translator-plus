@@ -5,9 +5,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.utils.UrlBuilder;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
@@ -67,6 +65,7 @@ public class FragmentTranslationCard extends Fragment {
     }
 
     public Subscription subscribe(Observable<TranslationTask> observable) {
+        // TODO: show progress in activity
         return observable.debounce(350, TimeUnit.MILLISECONDS)
                 .doOnNext(translationDirection -> showProgress())
                 .switchMap(task -> ApiTranslator.getInstance().translate(task))

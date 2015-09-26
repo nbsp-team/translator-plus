@@ -17,7 +17,7 @@ import rx.Observable;
 public interface YandexTranslator {
 
     @GET("/translate")
-    Observable<TranslateResult> translate(@Query("text") String text, @Query("lang") TranslationDirection lang);
+    Observable<TranslateResult> translate(@Query("text") String text, @Query("lang") TranslationDirection lang, @Query("options") int options);
 
     @GET("/getLangs")
     Observable<List<Language>> getLanguages(@Query("ui") String lang);

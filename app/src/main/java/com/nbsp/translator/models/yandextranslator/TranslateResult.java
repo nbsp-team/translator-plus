@@ -18,6 +18,9 @@ public class TranslateResult {
     @SerializedName("text")
     private List<String> mTexts;
 
+    @SerializedName("detected")
+    private DetectedLanguage detectedLang;
+
     public TranslateResult(int code, String lang, List<String> texts) {
         super();
 
@@ -44,5 +47,9 @@ public class TranslateResult {
         } else {
             return "";
         }
+    }
+
+    public DetectedLanguage getDetectedLang() {
+        return detectedLang;
     }
 }
