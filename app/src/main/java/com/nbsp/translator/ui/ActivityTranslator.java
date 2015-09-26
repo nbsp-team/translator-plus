@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.nbsp.translator.App;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.ApiTranslator;
 import com.nbsp.translator.data.History;
@@ -21,11 +22,10 @@ import com.nbsp.translator.data.HistoryItem;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
+import com.nbsp.translator.ui.fragment.FragmentHistory;
 import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import com.nbsp.translator.ui.fragment.FragmentTranslationCard;
-import com.pushtorefresh.storio.sqlite.queries.Query;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
@@ -33,11 +33,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.subscriptions.CompositeSubscription;
 
-public class ActivityTranslator extends AppCompatActivity {
+public class ActivityTranslator extends AppCompatActivity implements FragmentHistory.OnHistoryItemSelectedListener {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
     private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
     private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
@@ -57,6 +55,10 @@ public class ActivityTranslator extends AppCompatActivity {
     @Bind(R.id.result_container)
     protected View mResultContainer;
 
+    @Bind(R.id.scroll)
+    protected ScrollView mScrollView;
+
+    private FragmentLanguagePicker mLanguagePicker;
     private Subscription mSubscription;
 
     @Override
@@ -66,8 +68,8 @@ public class ActivityTranslator extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Observable<String> originalTextObservable = RxTextView.textChanges(mOriginalTextInput).map(CharSequence::toString);
-        FragmentLanguagePicker languagePicker = (FragmentLanguagePicker) getFragmentManager().findFragmentById(R.id.language_picker);
-        Observable<TranslationDirection> languageDirectionObservable = languagePicker.getObservable();
+        mLanguagePicker = (FragmentLanguagePicker) getFragmentManager().findFragmentById(R.id.language_picker);
+        Observable<TranslationDirection> languageDirectionObservable = mLanguagePicker.getObservable();
 
         Observable<TranslateResult> resultObservable = Observable.combineLatest(
                 languageDirectionObservable,
@@ -158,5 +160,14 @@ public class ActivityTranslator extends AppCompatActivity {
     protected void captureImage() {
         Intent intent = new Intent(this, ActivityCloudSightAnalyze.class);
         startActivityForResult(intent, ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    public void onHistoryItemSelected(HistoryItem item) {
+        TranslationDirection direction = new TranslationDirection(item.getLang());
+        App.getInstance().setTranslationDirection(direction);
+        mLanguagePicker.updateDirection();
+        mOriginalTextInput.setText(item.getOriginal());
+        mScrollView.scrollTo(0, 0);
     }
 }

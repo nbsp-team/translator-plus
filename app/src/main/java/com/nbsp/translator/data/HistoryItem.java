@@ -14,6 +14,9 @@ public class HistoryItem {
     @StorIOSQLiteColumn(name = "id", key = true)
     String id;
 
+    @StorIOSQLiteColumn(name = "date")
+    long date;
+
     @StorIOSQLiteColumn(name = "original")
     String original;
 
@@ -26,10 +29,11 @@ public class HistoryItem {
     HistoryItem() {}
 
     public HistoryItem(String original, String translate, String lang) {
-        this.id = UUID.randomUUID().toString();
+        this.date = System.currentTimeMillis();
         this.original = original;
         this.translate = translate;
         this.lang = lang;
+        this.id = lang + original;
     }
 
     public String getOriginal() {

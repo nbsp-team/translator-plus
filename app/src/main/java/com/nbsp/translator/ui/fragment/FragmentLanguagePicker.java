@@ -39,8 +39,6 @@ public class FragmentLanguagePicker extends Fragment {
     @Bind(R.id.btn_swap)
     protected View mSwapButton;
 
-    private TranslationDirection mTranslationDirection;
-
     private List<DirectionChangedListener> mListeners = new ArrayList<>();
 
     public FragmentLanguagePicker() {}
@@ -62,8 +60,6 @@ public class FragmentLanguagePicker extends Fragment {
         mFromSpinner.setAdapter(fromAdapter);
         mToSpinner.setAdapter(toAdapter);
 
-        mTranslationDirection = App.getInstance().getTranslationDirection();
-
         bindSpinners();
         updateDirection();
 
@@ -74,7 +70,7 @@ public class FragmentLanguagePicker extends Fragment {
         mFromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mTranslationDirection.setFrom(
+                App.getInstance().getTranslationDirection().setFrom(
                         Languages.getInstance().getLanguages().get(position)
                 );
                 updateDirection();
@@ -88,7 +84,7 @@ public class FragmentLanguagePicker extends Fragment {
         mToSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mTranslationDirection.setTo(
+                App.getInstance().getTranslationDirection().setTo(
                         Languages.getInstance().getLanguages().get(position)
                 );
                 updateDirection();
@@ -118,7 +114,7 @@ public class FragmentLanguagePicker extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                mTranslationDirection.swap();
+                App.getInstance().getTranslationDirection().swap();
                 updateDirection();
 
                 mFromSpinner.startAnimation(fadeInLeft);
@@ -135,11 +131,12 @@ public class FragmentLanguagePicker extends Fragment {
         mToSpinner.startAnimation(fadeOutRight);
     }
 
-    private void updateDirection() {
+    public void updateDirection() {
         List<Language> languages = Languages.getInstance().getLanguages();
-        mFromSpinner.setSelection(languages.indexOf(mTranslationDirection.getFrom()));
-        mToSpinner.setSelection(languages.indexOf(mTranslationDirection.getTo()));
-        onDirectionChanged(mTranslationDirection);
+        TranslationDirection direction = App.getInstance().getTranslationDirection();
+        mFromSpinner.setSelection(languages.indexOf(direction.getFrom()));
+        mToSpinner.setSelection(languages.indexOf(direction.getTo()));
+        onDirectionChanged();
     }
 
     @Override
@@ -148,9 +145,9 @@ public class FragmentLanguagePicker extends Fragment {
         mListeners.clear();
     }
 
-    private void onDirectionChanged(TranslationDirection translationDirection) {
+    private void onDirectionChanged() {
         for(DirectionChangedListener listener : mListeners) {
-            listener.onDirectionChanged(mTranslationDirection);
+            listener.onDirectionChanged(App.getInstance().getTranslationDirection());
         }
     }
 

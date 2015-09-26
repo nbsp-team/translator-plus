@@ -45,6 +45,7 @@ public class History {
                 .listOfObjects(HistoryItem.class)
                 .withQuery(Query.builder()
                         .table("history")
+                        .orderBy("date DESC")
                         .limit(size)
                         .build())
                 .prepare()
@@ -68,6 +69,7 @@ public class History {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table history ("
                     + "id text primary key,"
+                    + "date integer,"
                     + "original text,"
                     + "translate text,"
                     + "lang text"

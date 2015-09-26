@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:overScrollMode="never"
     android:clipChildren="false"
+    android:background="#e1e1e1"
+    android:id="@+id/scroll"
     >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e1e1e1"
         >
 
         <FrameLayout

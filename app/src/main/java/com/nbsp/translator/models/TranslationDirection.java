@@ -12,6 +12,12 @@ public class TranslationDirection implements Serializable {
     private Language from;
     private Language to;
 
+    public TranslationDirection(String direction) {
+        String[] codes = direction.split("-");
+        this.from = new Language(codes[0]);
+        this.to = new Language(codes[1]);
+    }
+
     public TranslationDirection(Language from, Language to) {
         this.from = from;
         this.to = to;

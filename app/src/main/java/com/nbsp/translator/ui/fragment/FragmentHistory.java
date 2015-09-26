@@ -1,5 +1,6 @@
 package com.nbsp.translator.ui.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,6 +29,16 @@ import rx.android.schedulers.AndroidSchedulers;
 public class FragmentHistory extends Fragment {
     @Bind(R.id.history_list)
     protected LinearLayout mHistoryLayout;
+    private OnHistoryItemSelectedListener mListener;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getActivity() instanceof OnHistoryItemSelectedListener) {
+            mListener = (OnHistoryItemSelectedListener) getActivity();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +73,22 @@ public class FragmentHistory extends Fragment {
                 View separator = inflater.inflate(R.layout.item_separator, mHistoryLayout, false);
                 mHistoryLayout.addView(separator);
             }
+
+            itemView.setOnClickListener(view -> {
+                if (mListener != null) {
+                    mListener.onHistoryItemSelected(item);
+                }
+            });
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnHistoryItemSelectedListener {
+        void onHistoryItemSelected(HistoryItem item);
     }
 }

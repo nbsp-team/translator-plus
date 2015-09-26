@@ -26,6 +26,10 @@ public class App {
         );
     }
 
+    public void setTranslationDirection(TranslationDirection direction) {
+        mTranslationDirection = direction;
+    }
+
     public TranslationDirection getTranslationDirection() {
         return mTranslationDirection;
     }
