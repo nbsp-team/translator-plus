@@ -45,7 +45,7 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
     private String mCurrentPhotoPath;
     private Subscription mAnalyticResultSubscription;
 
-    protected abstract Observable<String> getCompleteObservable(String imagePath, ImageView imageView);
+    protected abstract Observable<String> analyzeImage(String imagePath, ImageView imageView);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +79,11 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.analyze_bar);
         mAnalyzeBar.startAnimation(animation);
 
-        subscribeCompleteObservable();
+        startAnalyzing();
     }
 
-    private void subscribeCompleteObservable() {
-        mAnalyticResultSubscription = getCompleteObservable(mCurrentPhotoPath, mImageView)
+    private void startAnalyzing() {
+        mAnalyticResultSubscription = analyzeImage(mCurrentPhotoPath, mImageView)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override

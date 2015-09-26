@@ -17,7 +17,7 @@ import rx.Observable;
 public class ActivityCloudSightAnalyze extends ActivityImageAnalyze {
 
     @Override
-    protected Observable<String> getCompleteObservable(String imagePath, ImageView imageView) {
+    protected Observable<String> analyzeImage(String imagePath, ImageView imageView) {
         TypedFile imageFile = new TypedFile("image/jpeg", new File(imagePath));
 
         return ApiCloudSight.getInstance().recognize(imageFile,
