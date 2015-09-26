@@ -1,4 +1,4 @@
-package com.nbsp.translator.widget;
+package com.nbsp.translator.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class EditTextBackEvent extends EditText {
 
     public interface EditTextImeBackListener {
-        public abstract void onImeBack(EditTextBackEvent ctrl, String text);
+        void onImeBack(EditTextBackEvent ctrl, String text);
     }
 
     private EditTextImeBackListener mOnImeBack;

@@ -1,72 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    >
     <LinearLayout
-        android:id="@+id/languages_bar"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:transitionName="@string/transition_toolbar"
-        >
-        <fragment
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:name="com.nbsp.translator.ui.fragment.FragmentLanguagePicker"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/language_picker">
-        </fragment>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/language_edit_text_container"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="3dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:animateLayoutChanges="true"
-        android:transitionName="@string/transition_language_text_edit"
         >
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:id="@+id/toolbar"
+            >
+            <fragment
+                android:id="@+id/language_picker"
+                android:name="com.nbsp.translator.ui.fragment.FragmentLanguagePicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="@string/transition_toolbar"
+                >
+            </fragment>
+        </FrameLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/original_text_input_container"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:elevation="3dp"
+            android:transitionName="@string/transition_language_text_edit"
+            >
 
-            <com.nbsp.translator.widget.EditTextBackEvent
-                android:id="@+id/language_edit_text"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:focusable="true"
-                android:hint="белорусский"
-                android:paddingStart="16dp"
-                android:inputType="textFilter|textMultiLine"
-                android:textSize="20sp"
-                />
-
-            <ImageView
-                android:id="@+id/close_button"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/original_text_input"
+                android:layout_width="match_parent"
+                android:minHeight="@dimen/original_text_input_height"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:clickable="true"
-                android:background="@drawable/bg_clickable_circle"
-                android:src="@drawable/ic_close_black"
+                android:gravity="top"
+                android:textSize="22sp"
+                android:paddingTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:hint="@string/enter_original_text_hint"
+                android:background="@null"
                 />
 
+            <include layout="@layout/main_bottom_buttons_bar" />
         </LinearLayout>
 
-        <include
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/result_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/widget_result_translate" />
+            android:padding="8dp">
+            <fragment
+                android:id="@+id/translation_result_card"
+                android:name="com.nbsp.translator.ui.fragment.FragmentTranslationCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="@string/transition_toolbar"
+                >
+            </fragment>
+        </LinearLayout>
 
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>

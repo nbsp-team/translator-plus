@@ -28,7 +28,7 @@
         android:id="@+id/container_language_from"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/start_language_input_height"
+        android:layout_height="@dimen/original_text_input_height"
         android:background="@color/white"
         android:elevation="3dp"
         android:transitionName="@string/transition_language_text_edit"
@@ -68,7 +68,6 @@
                     android:layout_marginStart="2dp"
                     android:textColor="@color/black"
                     />
-
             </LinearLayout>
 
 
@@ -112,19 +111,16 @@
             card_view:cardCornerRadius="2dp"
             card_view:cardBackgroundColor="?attr/colorPrimary">
 
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/start_language_input_height"
+                android:layout_height="@dimen/original_text_input_height"
                 >
-
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
-
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_weight="1"
@@ -160,7 +156,6 @@
                         android:layout_height="24dp"
                         android:layout_margin="8dp"
                         />
-
                 </LinearLayout>
 
                 <TextView
@@ -184,7 +179,6 @@
             android:layout_marginTop="42dp"
             android:layout_gravity="center_horizontal"
             />
-
     </FrameLayout>
 
 </LinearLayout>

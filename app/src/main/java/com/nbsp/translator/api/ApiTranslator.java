@@ -3,9 +3,9 @@ package com.nbsp.translator.api;
 import com.nbsp.translator.api.request.YandexTranslator;
 import com.nbsp.translator.exception.network.AuthException;
 import com.nbsp.translator.exception.network.ConnectionException;
-import com.nbsp.translator.models.Language;
-import com.nbsp.translator.models.TranslateResult;
-import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.models.yandextranslator.Language;
+import com.nbsp.translator.models.yandextranslator.TranslateResult;
+import com.nbsp.translator.models.TranslationTask;
 
 import java.util.List;
 
@@ -18,24 +18,25 @@ import rx.Observable;
  * Created by Dimorinny on 10.09.15.
  */
 
-public class Api {
-    private static Api instance;
+public class ApiTranslator {
+    public static final int ENABLE_LANG_DETECTION = 1;
+    private static ApiTranslator instance;
 
-    private Api() {
+    private ApiTranslator() {
         initRestAdapter();
         initRequests();
     }
 
-    public static Api getInstance() {
+    public static ApiTranslator getInstance() {
         if (instance == null) {
-            instance = new Api();
+            instance = new ApiTranslator();
         }
 
         return instance;
     }
 
-    private static String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json";
-    private static String API_KEY = "trnsl.1.1.20150910T200437Z.e7c6c0d008f6e66e.46d4507dc332bb75eacc9414a76000251048c3be";
+    private final String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json";
+    private final String API_KEY = "trnsl.1.1.20150910T200437Z.e7c6c0d008f6e66e.46d4507dc332bb75eacc9414a76000251048c3be";
 
     private RestAdapter mRestAdapter;
     private YandexTranslator mYandexTranslator;
@@ -62,8 +63,8 @@ public class Api {
         mYandexTranslator = mRestAdapter.create(YandexTranslator.class);
     }
 
-    public Observable<TranslateResult> translate(String text, TranslationDirection lang) {
-        return mYandexTranslator.translate(text, lang);
+    public Observable<TranslateResult> translate(TranslationTask task) {
+        return mYandexTranslator.translate(task.getTextToTranslate(), task.getTranslationDirection(), ENABLE_LANG_DETECTION);
     }
 
     public Observable<List<Language>> getLanguages(String lang) {

@@ -1,7 +1,6 @@
 package com.nbsp.translator.api;
 
-import com.nbsp.translator.models.Language;
-import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.models.yandextranslator.Language;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,6 @@ public class Languages {
 
     private static Languages ourInstance = new Languages();
     private List<Language> mLanguages;
-    private TranslationDirection mTranslationDirection;
 
     public static Languages getInstance() {
         return ourInstance;
@@ -31,20 +29,9 @@ public class Languages {
         for(String lang : LANGUAGES) {
             mLanguages.add(new Language(lang));
         }
-
-        // Default direction
-        // TODO: detect current language
-        mTranslationDirection = new TranslationDirection(
-                mLanguages.get(0),
-                mLanguages.get(1)
-        );
     }
 
     public List<Language> getLanguages() {
         return mLanguages;
-    }
-
-    public TranslationDirection getTranslationDirection() {
-        return mTranslationDirection;
     }
 }

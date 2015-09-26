@@ -1,4 +1,4 @@
-package com.nbsp.translator.models;
+package com.nbsp.translator.models.yandextranslator;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -18,6 +18,9 @@ public class TranslateResult {
     @SerializedName("text")
     private List<String> mTexts;
 
+    @SerializedName("detected")
+    private DetectedLanguage detectedLang;
+
     public TranslateResult(int code, String lang, List<String> texts) {
         super();
 
@@ -36,5 +39,17 @@ public class TranslateResult {
 
     public List<String> getTexts() {
         return mTexts;
+    }
+
+    public String getText() {
+        if (mTexts.size() > 0) {
+            return mTexts.get(0);
+        } else {
+            return "";
+        }
+    }
+
+    public DetectedLanguage getDetectedLang() {
+        return detectedLang;
     }
 }

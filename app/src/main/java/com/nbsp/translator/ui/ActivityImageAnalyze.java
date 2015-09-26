@@ -3,11 +3,16 @@ package com.nbsp.translator.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.nbsp.translator.R;
@@ -19,15 +24,28 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import android.net.Uri;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
-public class ActivityImageAnalyze extends AppCompatActivity {
+public abstract class ActivityImageAnalyze extends AppCompatActivity {
+
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final String ARG_CURRENT_PHOTO_PATH = "arg_current_photo_path";
+
+    public static final String ARG_ANALYZE_RESULT = "arg_analyze_result";
 
     @Bind(R.id.image)
     protected ImageView mImageView;
 
+    @Bind(R.id.analyze_bar)
+    protected View mAnalyzeBar;
+
     private String mCurrentPhotoPath;
+    private Subscription mAnalyticResultSubscription;
+
+    protected abstract Observable<String> analyzeImage(String imagePath, ImageView imageView);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +53,19 @@ public class ActivityImageAnalyze extends AppCompatActivity {
         setContentView(R.layout.activity_image_analyze);
         ButterKnife.bind(this);
 
-        if (savedInstanceState == null) {
-            openCameraActivity();
-        }
+        initStatusBarColor();
+        initDataBySavedInstance(savedInstanceState);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+    private void initStatusBarColor() {
+        getWindow().setStatusBarColor(Color.BLACK);
+    }
+
+    private void initDataBySavedInstance(Bundle savedInstance) {
+        if (savedInstance == null) {
+            openCameraActivity();
+        } else {
+            mCurrentPhotoPath = savedInstance.getString(ARG_CURRENT_PHOTO_PATH);
             setPic();
         }
     }
@@ -53,7 +76,61 @@ public class ActivityImageAnalyze extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         mImageView.setImageBitmap(bitmap);
 
-        // TODO: send and analyze image
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.analyze_bar);
+        mAnalyzeBar.startAnimation(animation);
+
+        startAnalyzing();
+    }
+
+    private void startAnalyzing() {
+        mAnalyticResultSubscription = analyzeImage(mCurrentPhotoPath, mImageView)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        finishWithResult(s);
+                    }
+                });
+    }
+
+    private void finishWithResult(String result) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(ARG_ANALYZE_RESULT, result);
+
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mAnalyticResultSubscription != null) {
+            mAnalyticResultSubscription.unsubscribe();
+        }
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(ARG_CURRENT_PHOTO_PATH, mCurrentPhotoPath);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            setPic();
+        } else {
+            finish();
+        }
     }
 
     private void openCameraActivity() {
