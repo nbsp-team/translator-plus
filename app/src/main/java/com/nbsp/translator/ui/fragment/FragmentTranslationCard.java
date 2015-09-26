@@ -34,10 +34,6 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class FragmentTranslationCard extends Fragment {
-
-    @Bind(R.id.loading_progress_bar)
-    protected ProgressBar mLoadingProgressBar;
-
     @Bind(R.id.result_to)
     protected TextView mResultTo;
 
@@ -67,11 +63,8 @@ public class FragmentTranslationCard extends Fragment {
         return view;
     }
 
-    public Subscription subscribe(Observable<TranslationTask> observable) {
-        // TODO: show progress in activity
-        return observable.debounce(350, TimeUnit.MILLISECONDS)
-                .doOnNext(translationDirection -> showProgress())
-                .switchMap(task -> ApiTranslator.getInstance().translate(task))
+    public Subscription subscribe(Observable<TranslateResult> observable) {
+        return observable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TranslateResult>() {
                     @Override
@@ -106,27 +99,6 @@ public class FragmentTranslationCard extends Fragment {
         mResultTo.setText(result);
     }
 
-    private void showProgress() {
-        Animation animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fade_out);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mContainerLanguageTo.setVisibility(View.GONE);
-                mLoadingProgressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-
-        getActivity().runOnUiThread(() -> mContainerLanguageTo.startAnimation(animation));
-    }
-
     private void showResultCard(TranslateResult result) {
         TranslationDirection translationDirection = App.getInstance().getTranslationDirection();
         updateViews(translationDirection.getTo().getName(), result.getText());
@@ -136,24 +108,5 @@ public class FragmentTranslationCard extends Fragment {
                 App.getInstance().getTranslationDirection().getTo().getLanguageCode()
         ).toString();
         mPlayerFragment.setAudioUrl(ttsUrl);
-
-        Animation animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.fade_in);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                mLoadingProgressBar.setVisibility(View.GONE);
-                mContainerLanguageTo.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-
-        mContainerLanguageTo.startAnimation(animation);
     }
 }

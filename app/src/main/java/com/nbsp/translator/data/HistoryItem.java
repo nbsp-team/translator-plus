@@ -3,6 +3,8 @@ package com.nbsp.translator.data;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
+import java.util.UUID;
+
 /**
  * Created by nickolay on 26.09.15.
  */
@@ -10,7 +12,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 @StorIOSQLiteType(table = "history")
 public class HistoryItem {
     @StorIOSQLiteColumn(name = "id", key = true)
-    int id;
+    String id;
 
     @StorIOSQLiteColumn(name = "original")
     String original;
@@ -24,6 +26,7 @@ public class HistoryItem {
     HistoryItem() {}
 
     public HistoryItem(String original, String translate, String lang) {
+        this.id = UUID.randomUUID().toString();
         this.original = original;
         this.translate = translate;
         this.lang = lang;

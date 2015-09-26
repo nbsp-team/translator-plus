@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/bg_clickable"
+    android:clickable="true"
+    >
+    <TextView
+        android:id="@+id/original"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#414141"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:maxLines="1"
+        />
+    <TextView
+        android:id="@+id/translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#747474"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:maxLines="1"
+        />
+</LinearLayout>

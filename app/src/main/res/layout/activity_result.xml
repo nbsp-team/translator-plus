@@ -48,7 +48,7 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="24dp"
-                android:background="@drawable/bg_clickable_blue"
+                android:background="@drawable/bg_clickable"
                 android:clickable="true"
                 >
 
@@ -127,7 +127,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        android:background="@drawable/bg_clickable_blue"
+                        android:background="@drawable/bg_clickable"
                         android:clickable="true"
                         >
 

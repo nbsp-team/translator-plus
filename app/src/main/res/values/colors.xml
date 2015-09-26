@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#FFA930</color>
 
+    <color name="separator">#dfdfdf</color>
+
     <color name="white">#FFF</color>
     <color name="black">#000</color>
 </resources>

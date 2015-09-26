@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
     <FrameLayout
-        android:background="@drawable/bg_clickable_blue"
+        android:background="@drawable/bg_clickable"
         android:clipChildren="true"
         android:layout_width="0.0dip"
         android:layout_height="fill_parent"
@@ -40,7 +40,7 @@
         />
 
     <FrameLayout
-        android:background="@drawable/bg_clickable_blue"
+        android:background="@drawable/bg_clickable"
         android:clipChildren="true"
         android:layout_width="0.0dip"
         android:layout_height="fill_parent"

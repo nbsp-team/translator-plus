@@ -5,22 +5,37 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.R;
+import com.nbsp.translator.api.ApiTranslator;
+import com.nbsp.translator.data.History;
+import com.nbsp.translator.data.HistoryItem;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.TranslationTask;
+import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import com.nbsp.translator.ui.fragment.FragmentTranslationCard;
+import com.pushtorefresh.storio.sqlite.queries.Query;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.subscriptions.CompositeSubscription;
 
 public class ActivityTranslator extends AppCompatActivity {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
@@ -36,7 +51,13 @@ public class ActivityTranslator extends AppCompatActivity {
     @Bind(R.id.original_text_input)
     protected EditText mOriginalTextInput;
 
-    private Subscription mTranslationCardSubscription;
+    @Bind(R.id.loading_progress_bar)
+    protected ProgressBar mLoadingProgressBar;
+
+    @Bind(R.id.result_container)
+    protected View mResultContainer;
+
+    private Subscription mSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +69,47 @@ public class ActivityTranslator extends AppCompatActivity {
         FragmentLanguagePicker languagePicker = (FragmentLanguagePicker) getFragmentManager().findFragmentById(R.id.language_picker);
         Observable<TranslationDirection> languageDirectionObservable = languagePicker.getObservable();
 
-        FragmentTranslationCard translationCard = (FragmentTranslationCard) getFragmentManager().findFragmentById(R.id.translation_result_card);
-        mTranslationCardSubscription = translationCard.subscribe(Observable.combineLatest(
+        Observable<TranslateResult> resultObservable = Observable.combineLatest(
                 languageDirectionObservable,
                 originalTextObservable,
                 (direction, text) -> new TranslationTask(text, direction)
-        ));
+        )
+                .debounce(350, TimeUnit.MILLISECONDS)
+                .doOnNext(translationDirection -> setProgress(true))
+                .switchMap(task -> ApiTranslator.getInstance().translate(task))
+                .doOnNext(result -> setProgress(false));
+
+        FragmentTranslationCard translationCard = (FragmentTranslationCard) getFragmentManager().findFragmentById(R.id.translation_result_card);
+        Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
+
+        Subscription historySubscription = resultObservable
+                .debounce(600, TimeUnit.MILLISECONDS)
+                .map(result -> new HistoryItem(
+                        mOriginalTextInput.getText().toString(),
+                        result.getText(),
+                        result.getLang()
+                ))
+                .filter(item -> item.getOriginal().length() > 0 && item.getTranslate().length() > 0)
+                .subscribe(historyItem -> {
+                    History.putObject(ActivityTranslator.this, historyItem);
+                });
+
+        mSubscription = new CompositeSubscription(translationCardSubscription, historySubscription);
+    }
+
+    private void setProgress(boolean progress) {
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        runOnUiThread(() -> {
+            if (progress) {
+                mLoadingProgressBar.startAnimation(fadeIn);
+                mResultContainer.startAnimation(fadeOut);
+            } else {
+                mLoadingProgressBar.startAnimation(fadeOut);
+                mResultContainer.startAnimation(fadeIn);
+            }
+        });
     }
 
     @Override
@@ -65,7 +121,7 @@ public class ActivityTranslator extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mTranslationCardSubscription.unsubscribe();
+        mSubscription.unsubscribe();
     }
 
     @OnClick(R.id.original_text_input)
@@ -85,9 +141,7 @@ public class ActivityTranslator extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
-
             switch (requestCode) {
                 case EDIT_TEXT_ACTIVITY_REQUEST_CODE:
                     mOriginalTextInput.setText(data.getStringExtra(ORIGINAL_TEXT_EXTRA));

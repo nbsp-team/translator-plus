@@ -2,12 +2,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="never"
     android:clipChildren="false"
     >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#e1e1e1"
         >
 
         <FrameLayout
@@ -69,6 +71,24 @@
             </fragment>
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/loading_progress_bar"
+            android:visibility="gone"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="42dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <fragment
+            android:id="@+id/translation_history_card"
+            android:name="com.nbsp.translator.ui.fragment.FragmentHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            />
     </LinearLayout>
 
 </ScrollView>
