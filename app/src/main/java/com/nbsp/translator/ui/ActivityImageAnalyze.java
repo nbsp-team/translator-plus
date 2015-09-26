@@ -10,6 +10,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.nbsp.translator.R;
@@ -35,6 +38,9 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
 
     @Bind(R.id.image)
     protected ImageView mImageView;
+
+    @Bind(R.id.analyze_bar)
+    protected View mAnalyzeBar;
 
     private String mCurrentPhotoPath;
     private Subscription mAnalyticResultSubscription;
@@ -69,6 +75,9 @@ public abstract class ActivityImageAnalyze extends AppCompatActivity {
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         mImageView.setImageBitmap(bitmap);
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.analyze_bar);
+        mAnalyzeBar.startAnimation(animation);
 
         subscribeCompleteObservable();
     }

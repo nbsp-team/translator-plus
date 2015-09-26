@@ -5,11 +5,16 @@
     android:background="@color/black"
     android:clipChildren="false"
     >
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        />
+    <View
+        android:id="@+id/analyze_bar"
+        android:layout_height="match_parent"
+        android:layout_width="24dp"
+        android:background="@drawable/bg_analyze_bar"
         />
 </FrameLayout>
