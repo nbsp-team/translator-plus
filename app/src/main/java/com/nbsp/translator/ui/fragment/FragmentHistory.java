@@ -24,6 +24,8 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 
 public class FragmentHistory extends Fragment {
+    public static final int HISTORY_ITEMS_NUMBER = 25;
+
     @Bind(R.id.history_list)
     protected LinearLayout mHistoryLayout;
     private OnHistoryItemSelectedListener mListener;
@@ -44,7 +46,7 @@ public class FragmentHistory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         ButterKnife.bind(this, view);
 
-        mSubscription = History.getLastItems(getActivity(), 25)
+        mSubscription = History.getLastItems(getActivity(), HISTORY_ITEMS_NUMBER)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setHistory);
 

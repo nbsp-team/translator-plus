@@ -1,7 +1,5 @@
 package com.nbsp.translator.models;
 
-import com.nbsp.translator.models.yandextranslator.Language;
-
 import java.io.Serializable;
 
 /**

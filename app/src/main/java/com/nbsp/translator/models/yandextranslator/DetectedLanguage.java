@@ -1,6 +1,7 @@
 package com.nbsp.translator.models.yandextranslator;
 
 import com.google.gson.annotations.SerializedName;
+import com.nbsp.translator.models.Language;
 
 /**
  * Created by nickolay on 26.09.15.

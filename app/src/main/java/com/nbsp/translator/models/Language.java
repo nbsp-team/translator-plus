@@ -1,4 +1,4 @@
-package com.nbsp.translator.models.yandextranslator;
+package com.nbsp.translator.models;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -24,5 +24,15 @@ public class Language implements Serializable {
 
     public String getLanguageCode() {
         return locale.toLanguageTag();
+    }
+
+    @Override
+    public int hashCode() {
+        return locale.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Language && ((Language) o).getLocale().equals(locale);
     }
 }

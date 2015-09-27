@@ -4,7 +4,7 @@ import com.nbsp.translator.api.request.YandexTranslator;
 import com.nbsp.translator.exception.network.AuthException;
 import com.nbsp.translator.exception.network.ConnectionException;
 import com.nbsp.translator.models.TranslationTask;
-import com.nbsp.translator.models.yandextranslator.Language;
+import com.nbsp.translator.models.Language;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 
 import java.util.List;
