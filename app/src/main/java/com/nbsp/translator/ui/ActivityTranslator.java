@@ -1,12 +1,14 @@
 package com.nbsp.translator.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -14,15 +16,19 @@ import android.widget.ScrollView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
+import com.nbsp.translator.ThemeManager;
 import com.nbsp.translator.api.ApiTranslator;
 import com.nbsp.translator.data.History;
 import com.nbsp.translator.data.HistoryItem;
+import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.TranslationTask;
+import com.nbsp.translator.models.theme.Theme;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.ui.fragment.FragmentHistory;
 import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import com.nbsp.translator.ui.fragment.FragmentTranslationCard;
+import com.squareup.otto.Subscribe;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +39,7 @@ import rx.Observable;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-public class ActivityTranslator extends AppCompatActivity implements FragmentHistory.OnHistoryItemSelectedListener {
+public class ActivityTranslator extends BaseActivity implements FragmentHistory.OnHistoryItemSelectedListener {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
     private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
     private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
@@ -52,6 +58,9 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentHis
 
     @Bind(R.id.scroll)
     protected ScrollView mScrollView;
+
+    @Bind(R.id.toolbar)
+    protected View mToolbarContainer;
 
     private FragmentLanguagePicker mLanguagePicker;
     private Subscription mSubscription;
@@ -97,6 +106,14 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentHis
                 saveToHistorySubscription,
                 hideResultSubscription
         );
+    }
+
+    @Subscribe
+    @Override
+    public void colorize(ThemeChangeEvent event) {
+        Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
+        getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        mToolbarContainer.setBackgroundColor(currentTheme.getPrimaryColor());
     }
 
     public Observable<TranslationTask> getTranslationTaskObservable() {

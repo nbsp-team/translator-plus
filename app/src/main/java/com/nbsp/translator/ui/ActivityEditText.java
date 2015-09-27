@@ -15,11 +15,15 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
+import com.nbsp.translator.ThemeManager;
 import com.nbsp.translator.api.ApiTranslator;
+import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.TranslationTask;
+import com.nbsp.translator.models.theme.Theme;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.ui.widget.EditTextBackEvent;
 import com.nbsp.translator.ui.widget.TranslateResultBar;
+import com.squareup.otto.Subscribe;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +38,7 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by Dimorinny on 10.09.15.
  */
 
-public class ActivityEditText extends AppCompatActivity {
+public class ActivityEditText extends BaseActivity {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
 
     @Bind(R.id.language_edit_text)
@@ -48,6 +52,9 @@ public class ActivityEditText extends AppCompatActivity {
 
     @Bind(R.id.close_button)
     protected ImageView mClearButton;
+
+    @Bind(R.id.show_translation)
+    protected ImageView mShowTranslationIcon;
 
     private TranslateResultBar mTranslateResultBar;
     private Subscription mTranslateSubscription;
@@ -72,6 +79,14 @@ public class ActivityEditText extends AppCompatActivity {
         initHints();
 
         mTranslateSubscription = getTranslateSubscription();
+    }
+
+    @Subscribe
+    @Override
+    public void colorize(ThemeChangeEvent event) {
+        Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
+        getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        mShowTranslationIcon.setColorFilter(currentTheme.getPrimaryColor());
     }
 
     @OnClick(R.id.close_button)

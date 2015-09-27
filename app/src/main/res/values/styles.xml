@@ -38,4 +38,67 @@
         <item name="android:tint">#717171</item>
         <item name="android:padding">12dp</item>
     </style>
+
+    <!-- Themes -->
+
+    <style name="BlueTheme">
+        <item name="android:colorPrimary">#198ADF</item>
+        <item name="android:colorPrimaryDark">#1976D2</item>
+    </style>
+
+    <style name="RedTheme">
+        <item name="android:colorPrimary">#F44336</item>
+        <item name="android:colorPrimaryDark">#D50000</item>
+    </style>
+
+    <style name="IndigoTheme">
+        <item name="android:colorPrimary">#3F51B5</item>
+        <item name="android:colorPrimaryDark">#C51162</item>
+    </style>
+
+    <style name="PinkTheme">
+        <item name="android:colorPrimary">#E91E63</item>
+        <item name="android:colorPrimaryDark">#C51162</item>
+    </style>
+
+    <style name="CyanTheme">
+        <item name="android:colorPrimary">#0097A7</item>
+        <item name="android:colorPrimaryDark">#00B8D4</item>
+    </style>
+
+    <style name="GreenTheme">
+        <item name="android:colorPrimary">#43A047</item>
+        <item name="android:colorPrimaryDark">#1B5E20</item>
+    </style>
+
+    <style name="OrangeTheme">
+        <item name="android:colorPrimary">#EF6C00</item>
+        <item name="android:colorPrimaryDark">#E65100</item>
+    </style>
+
+    <style name="BrownTheme">
+        <item name="android:colorPrimary">#795548</item>
+        <item name="android:colorPrimaryDark">#3E2723</item>
+    </style>
+
+    <style name="BlueGreyTheme">
+        <item name="android:colorPrimary">#607D8B</item>
+        <item name="android:colorPrimaryDark">#37474F</item>
+    </style>
+
+    <style name="GreyTheme">
+        <item name="android:colorPrimary">#616161</item>
+        <item name="android:colorPrimaryDark">#424242</item>
+    </style>
+
+    <style name="TealTheme">
+        <item name="android:colorPrimary">#009688</item>
+        <item name="android:colorPrimaryDark">#00796B</item>
+    </style>
+
+    <style name="PurpleTheme">
+        <item name="android:colorPrimary">#9C27B0</item>
+        <item name="android:colorPrimaryDark">#4A148C</item>
+    </style>
+
 </resources>

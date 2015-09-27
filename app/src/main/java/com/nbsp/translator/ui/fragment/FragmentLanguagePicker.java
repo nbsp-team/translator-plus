@@ -14,6 +14,7 @@ import android.widget.SpinnerAdapter;
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.Languages;
+import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.Language;
 import com.nbsp.translator.ui.adapter.LanguagePickerAdapter;

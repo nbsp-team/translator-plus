@@ -1,10 +1,10 @@
 package com.nbsp.translator.ui.fragment;
 
-import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
+import com.nbsp.translator.ThemeManager;
+import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.TranslationDirection;
+import com.nbsp.translator.models.theme.Theme;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.utils.UrlBuilder;
+import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +29,7 @@ import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
-public class FragmentTranslationCard extends Fragment {
+public class FragmentTranslationCard extends BaseFragment {
     @Bind(R.id.result_to)
     protected TextView mResultTo;
 
@@ -33,7 +37,7 @@ public class FragmentTranslationCard extends Fragment {
     protected TextView mLanguageTo;
 
     @Bind(R.id.container_language_to)
-    protected View mContainerLanguageTo;
+    protected CardView mContainerLanguageTo;
 
     private FragmentPlayerButton mPlayerFragment;
 
@@ -51,8 +55,14 @@ public class FragmentTranslationCard extends Fragment {
         ButterKnife.bind(this, view);
 
         mPlayerFragment = (FragmentPlayerButton) getChildFragmentManager().findFragmentById(R.id.player);
-
         return view;
+    }
+
+    @Override
+    @Subscribe
+    public void colorize(ThemeChangeEvent event) {
+        Theme currentTheme = ThemeManager.getInstance(getActivity()).getCurrentTheme();
+        mContainerLanguageTo.setCardBackgroundColor(currentTheme.getPrimaryColor());
     }
 
     public Subscription subscribe(Observable<TranslateResult> observable) {

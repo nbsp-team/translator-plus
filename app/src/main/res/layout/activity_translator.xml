@@ -14,10 +14,10 @@
         >
 
         <FrameLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:id="@+id/toolbar"
             >
             <fragment
                 android:id="@+id/language_picker"
@@ -89,6 +89,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
+            />
+        <fragment
+            android:id="@+id/color_picker_card"
+            android:name="com.nbsp.translator.ui.fragment.FragmentColorPicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             />
     </LinearLayout>
 
