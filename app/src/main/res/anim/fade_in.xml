@@ -4,5 +4,7 @@
         android:fromAlpha="0.0"
         android:toAlpha="1.0"
         android:interpolator="@android:anim/accelerate_interpolator"
-        android:duration="200"/>
+        android:duration="200"
+        android:fillAfter="true"
+        />
 </set>

@@ -60,13 +60,15 @@
             android:id="@+id/result_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_height="wrap_content">
             <fragment
                 android:id="@+id/translation_result_card"
                 android:name="com.nbsp.translator.ui.fragment.FragmentTranslationCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
                 android:transitionName="@string/transition_toolbar"
                 >
             </fragment>
@@ -86,9 +88,7 @@
             android:name="com.nbsp.translator.ui.fragment.FragmentHistory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             />
     </LinearLayout>
 

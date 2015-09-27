@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -33,15 +34,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.subscriptions.CompositeSubscription;
 
 public class ActivityTranslator extends AppCompatActivity implements FragmentHistory.OnHistoryItemSelectedListener {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
     private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
     private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
-
-    @Bind(R.id.toolbar)
-    protected View mToolbar;
 
     @Bind(R.id.original_text_input_container)
     protected LinearLayout mLanguageInputContainer;
@@ -67,16 +67,11 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentHis
         setContentView(R.layout.activity_translator);
         ButterKnife.bind(this);
 
-        Observable<String> originalTextObservable = RxTextView.textChanges(mOriginalTextInput).map(CharSequence::toString);
         mLanguagePicker = (FragmentLanguagePicker) getFragmentManager().findFragmentById(R.id.language_picker);
-        Observable<TranslationDirection> languageDirectionObservable = mLanguagePicker.getObservable();
 
-        Observable<TranslateResult> resultObservable = Observable.combineLatest(
-                languageDirectionObservable,
-                originalTextObservable,
-                (direction, text) -> new TranslationTask(text, direction)
-        )
+        Observable<TranslateResult> resultObservable = getTranslationTaskObservable()
                 .debounce(350, TimeUnit.MILLISECONDS)
+                .filter(translationTask -> translationTask.getTextToTranslate().length() > 0)
                 .doOnNext(translationDirection -> setProgress(true))
                 .switchMap(task -> ApiTranslator.getInstance().translate(task))
                 .doOnNext(result -> setProgress(false));
@@ -84,8 +79,8 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentHis
         FragmentTranslationCard translationCard = (FragmentTranslationCard) getFragmentManager().findFragmentById(R.id.translation_result_card);
         Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
 
-        Subscription historySubscription = resultObservable
-                .debounce(600, TimeUnit.MILLISECONDS)
+        Subscription saveToHistorySubscription = resultObservable
+                .debounce(1000, TimeUnit.MILLISECONDS)
                 .map(result -> new HistoryItem(
                         mOriginalTextInput.getText().toString(),
                         result.getText(),
@@ -96,20 +91,38 @@ public class ActivityTranslator extends AppCompatActivity implements FragmentHis
                     History.putObject(ActivityTranslator.this, historyItem);
                 });
 
-        mSubscription = new CompositeSubscription(translationCardSubscription, historySubscription);
+        Subscription hideResultSubscription = getTranslationTaskObservable()
+                .filter(translationTask -> translationTask.getTextToTranslate().length() == 0)
+                .subscribe(translationTask -> {
+                    mResultContainer.setVisibility(View.GONE);
+                });
+
+        mSubscription = new CompositeSubscription(
+                translationCardSubscription,
+                saveToHistorySubscription,
+                hideResultSubscription
+        );
+    }
+
+    public Observable<TranslationTask> getTranslationTaskObservable() {
+        Observable<String> originalTextObservable = RxTextView.textChanges(mOriginalTextInput).map(CharSequence::toString);
+        Observable<TranslationDirection> languageDirectionObservable = mLanguagePicker.getObservable();
+
+        return Observable.combineLatest(
+                languageDirectionObservable,
+                originalTextObservable,
+                (direction, text) -> new TranslationTask(text, direction)
+        );
     }
 
     private void setProgress(boolean progress) {
-        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-
         runOnUiThread(() -> {
             if (progress) {
-                mLoadingProgressBar.startAnimation(fadeIn);
-                mResultContainer.startAnimation(fadeOut);
+                mLoadingProgressBar.setVisibility(View.VISIBLE);
+                mResultContainer.setVisibility(View.GONE);
             } else {
-                mLoadingProgressBar.startAnimation(fadeOut);
-                mResultContainer.startAnimation(fadeIn);
+                mLoadingProgressBar.setVisibility(View.GONE);
+                mResultContainer.setVisibility(View.VISIBLE);
             }
         });
     }
