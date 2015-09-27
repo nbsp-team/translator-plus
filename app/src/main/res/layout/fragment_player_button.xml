@@ -6,4 +6,5 @@
     android:layout_gravity="center"
     android:src="@drawable/ic_volume_off_white_24dp"
     android:background="@drawable/bg_clickable_circle"
+    android:contentDescription="@string/sound"
     />

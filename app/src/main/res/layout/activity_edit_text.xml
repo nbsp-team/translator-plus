@@ -26,7 +26,6 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:focusable="true"
-                android:hint="белорусский"
                 android:paddingStart="16dp"
                 android:inputType="textFilter"
                 android:textSize="20sp"
