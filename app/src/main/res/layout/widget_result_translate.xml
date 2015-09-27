@@ -37,6 +37,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_circle_arrow_right"
+            android:tint="@color/colorPrimary"
             android:contentDescription="@string/show_translation"
             />
     </LinearLayout>
