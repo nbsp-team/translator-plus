@@ -1,10 +1,7 @@
 package com.nbsp.translator.ui.fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +11,6 @@ import android.widget.TextView;
 import com.nbsp.translator.R;
 import com.nbsp.translator.data.History;
 import com.nbsp.translator.data.HistoryItem;
-import com.pushtorefresh.storio.sqlite.queries.Query;
 
 import java.util.List;
 

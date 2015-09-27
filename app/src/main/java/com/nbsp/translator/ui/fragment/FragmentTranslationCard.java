@@ -4,26 +4,18 @@ import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
-import com.nbsp.translator.api.ApiTranslator;
 import com.nbsp.translator.models.TranslationDirection;
-import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.utils.UrlBuilder;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

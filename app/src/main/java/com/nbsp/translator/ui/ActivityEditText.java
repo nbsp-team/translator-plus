@@ -6,22 +6,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
 import com.nbsp.translator.R;
 import com.nbsp.translator.api.ApiTranslator;
-import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.models.TranslationTask;
-import com.nbsp.translator.ui.widget.TranslateResultBar;
+import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.ui.widget.EditTextBackEvent;
+import com.nbsp.translator.ui.widget.TranslateResultBar;
 
 import java.util.concurrent.TimeUnit;
 

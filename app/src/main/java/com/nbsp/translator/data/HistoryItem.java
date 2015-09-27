@@ -3,8 +3,6 @@ package com.nbsp.translator.data;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
-import java.util.UUID;
-
 /**
  * Created by nickolay on 26.09.15.
  */
