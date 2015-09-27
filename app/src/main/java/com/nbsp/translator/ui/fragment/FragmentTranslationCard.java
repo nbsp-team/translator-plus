@@ -82,7 +82,7 @@ public class FragmentTranslationCard extends Fragment {
             ClipData clip = ClipData.newPlainText("label", mResultTo.getText().toString());
             clipboard.setPrimaryClip(clip);
 
-            Toast.makeText(getActivity(), R.string.text_copyed, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.text_copied, Toast.LENGTH_SHORT).show();
         }
     }
 

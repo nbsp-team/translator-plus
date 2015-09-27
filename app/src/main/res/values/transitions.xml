@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_toolbar">transition_toolbar</string>
+    <string name="transition_language_text_edit">transition_language_text_edit</string>
+</resources>

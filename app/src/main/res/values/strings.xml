@@ -1,17 +1,12 @@
 <resources>
-    <string name="app_name">Translator+</string>
+    <string name="app_name">Translator Plus</string>
 
     <string name="error_network">Ошибка подключения, попробуйте позже</string>
     <string name="error_auth">Ошибка авторизации в Яндекс API</string>
 
-    <string name="transition_toolbar">transition_toolbar</string>
-    <string name="transition_language_text_edit">transition_language_text_edit</string>
     <string name="enter_original_text_hint">Введите текст</string>
     <string name="swap_languages">Поменять местами</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_preload">PreloadActivity</string>
     <string name="сopy">Скопировать</string>
-    <string name="text_copyed">Перевод скопирован</string>
+    <string name="text_copied">Перевод скопирован</string>
 </resources>
