@@ -41,7 +41,6 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.pushtorefresh.storio:sqlite:1.4.0'
     compile 'com.pushtorefresh.storio:sqlite-annotations:1.4.0'
-    compile 'com.github.pavlospt:circleview:1.2'
     apt 'com.pushtorefresh.storio:sqlite-annotations-processor:1.4.0'
 }
 
