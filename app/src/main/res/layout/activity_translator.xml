@@ -57,49 +57,50 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/result_container"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp">
+
+            <FrameLayout
+                android:id="@+id/result_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <fragment
+                    android:id="@+id/translation_result_card"
+                    android:name="com.nbsp.translator.ui.fragment.FragmentTranslationResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:transitionName="@string/transition_toolbar"
+                    />
+
+            </FrameLayout>
+
+            <ProgressBar
+                android:id="@+id/loading_progress_bar"
+                android:visibility="gone"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_margin="42dp"
+                android:layout_gravity="center_horizontal"
+                />
+
             <fragment
-                android:id="@+id/translation_result_card"
-                android:name="com.nbsp.translator.ui.fragment.FragmentTranslationCard"
+                android:id="@+id/translation_history_card"
+                android:name="com.nbsp.translator.ui.fragment.FragmentHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:transitionName="@string/transition_toolbar"
-                >
-            </fragment>
+                />
+
+            <fragment
+                android:id="@+id/color_picker_card"
+                android:name="com.nbsp.translator.ui.fragment.FragmentColorPicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/loading_progress_bar"
-            android:visibility="gone"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_margin="42dp"
-            android:layout_gravity="center_horizontal"
-            />
-
-        <fragment
-            android:id="@+id/translation_history_card"
-            android:name="com.nbsp.translator.ui.fragment.FragmentHistory"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            />
-        
-        <fragment
-            android:id="@+id/color_picker_card"
-            android:name="com.nbsp.translator.ui.fragment.FragmentColorPicker"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            />
     </LinearLayout>
-
 </ScrollView>

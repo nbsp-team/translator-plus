@@ -21,10 +21,11 @@ import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.TranslationTask;
 import com.nbsp.translator.models.theme.Theme;
+import com.nbsp.translator.models.yandextranslator.DetectedLanguage;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 import com.nbsp.translator.ui.fragment.FragmentHistory;
 import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
-import com.nbsp.translator.ui.fragment.FragmentTranslationCard;
+import com.nbsp.translator.ui.fragment.FragmentTranslationResult;
 import com.squareup.otto.Subscribe;
 
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,7 @@ import rx.Observable;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-public class ActivityTranslator extends BaseActivity implements FragmentHistory.OnHistoryItemSelectedListener {
+public class ActivityTranslator extends BaseActivity implements FragmentHistory.OnHistoryItemSelectedListener, FragmentTranslationResult.OnDetectedLanguageClickListener {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
     private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
     private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
@@ -77,7 +78,7 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
                 .switchMap(task -> ApiTranslator.getInstance().translate(task))
                 .doOnNext(result -> setProgress(false));
 
-        FragmentTranslationCard translationCard = (FragmentTranslationCard) getFragmentManager().findFragmentById(R.id.translation_result_card);
+        FragmentTranslationResult translationCard = (FragmentTranslationResult) getFragmentManager().findFragmentById(R.id.translation_result_card);
         Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
 
         Subscription saveToHistorySubscription = resultObservable
@@ -191,5 +192,19 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
         mLanguagePicker.updateDirection();
         mOriginalTextInput.setText(item.getOriginal());
         mScrollView.scrollTo(0, 0);
+    }
+
+    @Override
+    public void onDetectedLanguageClicked(DetectedLanguage detectedLanguage) {
+        TranslationDirection currentDirection = App.getInstance().getTranslationDirection();
+
+        if (currentDirection.getTo().equals(detectedLanguage.getLanguage())) {
+            currentDirection.swap();
+            App.getInstance().setTranslationDirection(currentDirection);
+        } else {
+            App.getInstance().setTranslationDirection(new TranslationDirection(detectedLanguage.getLanguage(), currentDirection.getFrom()));
+        }
+
+        mLanguagePicker.updateDirection();
     }
 }

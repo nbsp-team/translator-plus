@@ -11,4 +11,5 @@
     <string name="swap_languages">Swap languages</string>
     <string name="text_copied">Text copied</string>
     <string name="сopy">Copy</string>
+    <string name="translate_from">Translate from:</string>
 </resources>
