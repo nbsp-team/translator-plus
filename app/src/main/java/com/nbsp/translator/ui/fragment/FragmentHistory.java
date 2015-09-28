@@ -2,6 +2,7 @@ package com.nbsp.translator.ui.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,10 @@ public class FragmentHistory extends Fragment {
 
     @Bind(R.id.history_list)
     protected LinearLayout mHistoryLayout;
+
+    @Bind(R.id.history_card)
+    protected CardView mHistoryContainerCard;
+
     private OnHistoryItemSelectedListener mListener;
     private Subscription mSubscription;
 
@@ -56,6 +61,8 @@ public class FragmentHistory extends Fragment {
     private void setHistory(List<HistoryItem> historyItems) {
         mHistoryLayout.removeAllViews();
 
+        setVisiblilityCardContainer(!historyItems.isEmpty());
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
         for (int i = 0; i < historyItems.size(); i++) {
             HistoryItem item = historyItems.get(i);
@@ -80,6 +87,10 @@ public class FragmentHistory extends Fragment {
                 }
             });
         }
+    }
+
+    private void setVisiblilityCardContainer(boolean visibility) {
+        mHistoryContainerCard.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
     @Override

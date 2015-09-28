@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -58,7 +57,6 @@
         card_view:cardElevation="1dp"
         card_view:cardCornerRadius="2dp"
         card_view:cardBackgroundColor="?attr/colorPrimary"
-        app:cardUseCompatPadding="true"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="8dp"
