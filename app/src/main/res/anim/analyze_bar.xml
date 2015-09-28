@@ -2,8 +2,8 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
         android:duration="2700"
-        android:fromXDelta="0"
-        android:toXDelta="95%p"
+        android:fromXDelta="-7%p"
+        android:toXDelta="107%p"
         android:repeatMode="reverse"
         android:repeatCount="-1"
         />

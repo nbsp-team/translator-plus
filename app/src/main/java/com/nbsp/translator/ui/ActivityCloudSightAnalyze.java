@@ -3,8 +3,12 @@ package com.nbsp.translator.ui;
 import android.widget.ImageView;
 
 import com.nbsp.translator.App;
+import com.nbsp.translator.ThemeManager;
 import com.nbsp.translator.api.ApiCloudSight;
+import com.nbsp.translator.event.ThemeChangeEvent;
 import com.nbsp.translator.models.cloudsight.CSCheckResultResponse;
+import com.nbsp.translator.models.theme.Theme;
+import com.squareup.otto.Subscribe;
 
 import java.io.File;
 
@@ -15,6 +19,13 @@ import rx.Observable;
  * Created by Dimorinny on 23.09.15.
  */
 public class ActivityCloudSightAnalyze extends ActivityImageAnalyze {
+
+    @Subscribe
+    @Override
+    public void colorize(ThemeChangeEvent event) {
+        Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
+        mAnalyzeBar.setBackgroundColor(currentTheme.getPrimaryColor());
+    }
 
     @Override
     protected Observable<String> analyzeImage(String imagePath, ImageView imageView) {

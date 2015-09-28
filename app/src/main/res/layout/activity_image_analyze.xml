@@ -15,7 +15,8 @@
     <View
         android:id="@+id/analyze_bar"
         android:layout_height="match_parent"
-        android:layout_width="24dp"
-        android:background="@drawable/bg_analyze_bar"
+        android:layout_width="12dp"
+        android:alpha="0.8"
+        android:background="?attr/colorPrimary"
         />
 </FrameLayout>

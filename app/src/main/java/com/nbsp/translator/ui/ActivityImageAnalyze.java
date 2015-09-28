@@ -29,7 +29,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
-public abstract class ActivityImageAnalyze extends AppCompatActivity {
+public abstract class ActivityImageAnalyze extends BaseActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String ARG_CURRENT_PHOTO_PATH = "arg_current_photo_path";
