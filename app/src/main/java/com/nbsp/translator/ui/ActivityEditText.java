@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
@@ -53,6 +54,9 @@ public class ActivityEditText extends BaseActivity {
     @Bind(R.id.close_button)
     protected ImageView mClearButton;
 
+    @Bind(R.id.language_result_textview)
+    protected TextView mResultTextView;
+
     @Bind(R.id.show_translation)
     protected ImageView mShowTranslationIcon;
 
@@ -87,6 +91,7 @@ public class ActivityEditText extends BaseActivity {
         Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
         getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
         mShowTranslationIcon.setColorFilter(currentTheme.getPrimaryColor());
+        mResultTextView.setTextColor(currentTheme.getPrimaryColor());
     }
 
     @OnClick(R.id.close_button)
