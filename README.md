@@ -16,6 +16,7 @@
 ### Технологии
 * RxJava
 * Retrofit
+* Retrolambda
 * RxBinding
 * Otto EventBus
 * StorIO
