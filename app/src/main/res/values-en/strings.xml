@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Translator Plus</string>
+    <string name="analyze_image">Analyze image</string>
+    <string name="enter_original_text_hint">Touch to type</string>
+    <string name="error_auth">Yandex API authentication error</string>
+    <string name="error_network">Connection error, try again later</string>
+    <string name="make_photo">Take picture</string>
+    <string name="show_translation">Show translation</string>
+    <string name="sound">Pronounce</string>
+    <string name="swap_languages">Swap languages</string>
+    <string name="text_copied">Text copied</string>
+    <string name="сopy">Copy</string>
+</resources>
