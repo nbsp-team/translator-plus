@@ -92,6 +92,7 @@ public class ActivityEditText extends BaseActivity {
     @OnClick(R.id.close_button)
     protected void onCloseClicked(View view) {
         mOriginalEditText.setText("");
+        onBackPressed();
     }
 
     private Subscription getTranslateSubscription() {
