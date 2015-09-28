@@ -48,47 +48,47 @@
 
     <style name="RedTheme">
         <item name="android:colorPrimary">#F44336</item>
-        <item name="android:colorPrimaryDark">#D50000</item>
+        <item name="android:colorPrimaryDark">#D32F2F</item>
     </style>
 
     <style name="IndigoTheme">
         <item name="android:colorPrimary">#3F51B5</item>
-        <item name="android:colorPrimaryDark">#C51162</item>
+        <item name="android:colorPrimaryDark">#303F9F</item>
     </style>
 
     <style name="PinkTheme">
         <item name="android:colorPrimary">#E91E63</item>
-        <item name="android:colorPrimaryDark">#C51162</item>
+        <item name="android:colorPrimaryDark">#C2185B</item>
     </style>
 
     <style name="CyanTheme">
-        <item name="android:colorPrimary">#0097A7</item>
-        <item name="android:colorPrimaryDark">#00B8D4</item>
+        <item name="android:colorPrimary">#00BCD4</item>
+        <item name="android:colorPrimaryDark">#0097A7</item>
     </style>
 
     <style name="GreenTheme">
-        <item name="android:colorPrimary">#43A047</item>
-        <item name="android:colorPrimaryDark">#1B5E20</item>
+        <item name="android:colorPrimary">#4CAF50</item>
+        <item name="android:colorPrimaryDark">#388E3C</item>
     </style>
 
     <style name="OrangeTheme">
-        <item name="android:colorPrimary">#EF6C00</item>
-        <item name="android:colorPrimaryDark">#E65100</item>
+        <item name="android:colorPrimary">#FF5722</item>
+        <item name="android:colorPrimaryDark">#E64A19</item>
     </style>
 
     <style name="BrownTheme">
         <item name="android:colorPrimary">#795548</item>
-        <item name="android:colorPrimaryDark">#3E2723</item>
+        <item name="android:colorPrimaryDark">#5D4037</item>
     </style>
 
     <style name="BlueGreyTheme">
         <item name="android:colorPrimary">#607D8B</item>
-        <item name="android:colorPrimaryDark">#37474F</item>
+        <item name="android:colorPrimaryDark">#455A64</item>
     </style>
 
     <style name="GreyTheme">
-        <item name="android:colorPrimary">#616161</item>
-        <item name="android:colorPrimaryDark">#424242</item>
+        <item name="android:colorPrimary">#9E9E9E</item>
+        <item name="android:colorPrimaryDark">#616161</item>
     </style>
 
     <style name="TealTheme">
@@ -98,7 +98,7 @@
 
     <style name="PurpleTheme">
         <item name="android:colorPrimary">#9C27B0</item>
-        <item name="android:colorPrimaryDark">#4A148C</item>
+        <item name="android:colorPrimaryDark">#7B1FA2</item>
     </style>
 
 </resources>
