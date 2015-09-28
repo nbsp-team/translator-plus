@@ -6,7 +6,7 @@
 
 Доступно на [Google Play](https://play.google.com/store/apps/details?id=com.nbsp.translator).
 
-![Скриншоты](https://i.imgur.com/CXpvmls.png)
+![Скриншоты](https://i.imgur.com/bkkxVGD.png)
 
 ### Фичи
 * Перевод текстов между любыми 63 языками
