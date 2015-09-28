@@ -1,4 +1,4 @@
-package com.nbsp.translator.api;
+package com.nbsp.translator;
 
 import com.nbsp.translator.models.Language;
 

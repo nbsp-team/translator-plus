@@ -16,8 +16,7 @@ public class PrefUtils {
     public static void setCurrentTheme(Context context, int currentTheme) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
-        sp.edit()
-                .putInt(PREF_CURRENT_THEME_KEY, currentTheme)
+        sp.edit().putInt(PREF_CURRENT_THEME_KEY, currentTheme)
                 .apply();
     }
 

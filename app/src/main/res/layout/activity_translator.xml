@@ -90,6 +90,7 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             />
+        
         <fragment
             android:id="@+id/color_picker_card"
             android:name="com.nbsp.translator.ui.fragment.FragmentColorPicker"
