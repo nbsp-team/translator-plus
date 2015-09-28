@@ -2,6 +2,7 @@ package com.nbsp.translator.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
@@ -28,6 +30,7 @@ import com.nbsp.translator.ui.fragment.FragmentLanguagePicker;
 import com.nbsp.translator.ui.fragment.FragmentTranslationResult;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
@@ -39,8 +42,9 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ActivityTranslator extends BaseActivity implements FragmentHistory.OnHistoryItemSelectedListener, FragmentTranslationResult.OnDetectedLanguageClickListener {
     public static final String ORIGINAL_TEXT_EXTRA = "text";
-    private static final int EDIT_TEXT_ACTIVITY_REQUEST_CODE = 0;
-    private static final int ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE = 1;
+    private static final int REQUEST_CODE_EDIT_TEXT_ACTIVITY = 0;
+    private static final int REQUEST_CODE_TEXT_RECOGNIZE_ACTIVITY= 1;
+    private static final int REQUEST_CODE_ANALYZE_PHOTO_ACTIVITY = 2;
 
     @Bind(R.id.original_text_input_container)
     protected LinearLayout mLanguageInputContainer;
@@ -161,19 +165,26 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
         );
 
         ActivityCompat.startActivityForResult(this, intent,
-                EDIT_TEXT_ACTIVITY_REQUEST_CODE, activityOptions.toBundle());
+                REQUEST_CODE_EDIT_TEXT_ACTIVITY, activityOptions.toBundle());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case EDIT_TEXT_ACTIVITY_REQUEST_CODE:
+                case REQUEST_CODE_EDIT_TEXT_ACTIVITY:
                     mOriginalTextInput.setText(data.getStringExtra(ORIGINAL_TEXT_EXTRA));
                     break;
 
-                case ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE:
+                case REQUEST_CODE_ANALYZE_PHOTO_ACTIVITY:
                     mOriginalTextInput.setText(data.getStringExtra(ActivityImageAnalyze.ARG_ANALYZE_RESULT));
+                    break;
+
+                case REQUEST_CODE_TEXT_RECOGNIZE_ACTIVITY:
+                    ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    if (thingsYouSaid != null && !thingsYouSaid.isEmpty()) {
+                        mOriginalTextInput.setText(thingsYouSaid.get(0));
+                    }
                     break;
             }
         }
@@ -182,7 +193,16 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
     @OnClick(R.id.main_bottom_button_image)
     protected void captureImage() {
         Intent intent = new Intent(this, ActivityCloudSightAnalyze.class);
-        startActivityForResult(intent, ANALYZE_PHOTO_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, REQUEST_CODE_ANALYZE_PHOTO_ACTIVITY);
+    }
+
+    @OnClick(R.id.main_bottom_button_mic)
+    protected void speachToText() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, App.getInstance().getTranslationDirection().getFrom().getLanguageCode());
+        try {
+            startActivityForResult(intent, REQUEST_CODE_TEXT_RECOGNIZE_ACTIVITY );
+        } catch (Exception ignored) {}
     }
 
     @Override
