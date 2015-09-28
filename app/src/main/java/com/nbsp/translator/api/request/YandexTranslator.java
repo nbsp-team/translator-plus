@@ -1,7 +1,7 @@
 package com.nbsp.translator.api.request;
 
-import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.Language;
+import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.yandextranslator.TranslateResult;
 
 import java.util.List;

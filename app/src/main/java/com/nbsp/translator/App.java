@@ -1,7 +1,7 @@
 package com.nbsp.translator;
 
-import com.nbsp.translator.models.TranslationDirection;
 import com.nbsp.translator.models.Language;
+import com.nbsp.translator.models.TranslationDirection;
 
 import java.util.List;
 
