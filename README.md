@@ -4,7 +4,9 @@
 
 Приложение для перевода текстов с помощью API Яндекс Переводчика. Имеется возможность распознавания образов с помощью API от CloudSight.
 
-![Скриншоты](https://i.imgur.com/ijL73LI.png)
+Доступно на [Google Play](https://play.google.com/store/apps/details?id=com.nbsp.translator).
+
+![Скриншоты](https://i.imgur.com/CXpvmls.png)
 
 ### Фичи
 * Перевод текстов между любыми 63 языками
