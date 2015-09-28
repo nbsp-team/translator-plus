@@ -33,7 +33,6 @@ public abstract class ActivityImageAnalyze extends BaseActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String ARG_CURRENT_PHOTO_PATH = "arg_current_photo_path";
-
     public static final String ARG_ANALYZE_RESULT = "arg_analyze_result";
 
     @Bind(R.id.image)
@@ -114,7 +113,6 @@ public abstract class ActivityImageAnalyze extends BaseActivity {
         if (mAnalyticResultSubscription != null) {
             mAnalyticResultSubscription.unsubscribe();
         }
-
         super.onDestroy();
     }
 

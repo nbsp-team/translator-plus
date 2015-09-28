@@ -85,6 +85,12 @@ public class ActivityEditText extends BaseActivity {
         mTranslateSubscription = getTranslateSubscription();
     }
 
+    @OnClick(R.id.close_button)
+    protected void onCloseClicked(View view) {
+        mOriginalEditText.setText("");
+        onBackPressed();
+    }
+
     @Subscribe
     @Override
     public void colorize(ThemeChangeEvent event) {
@@ -92,12 +98,6 @@ public class ActivityEditText extends BaseActivity {
         getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
         mShowTranslationIcon.setColorFilter(currentTheme.getPrimaryColor());
         mResultTextView.setTextColor(currentTheme.getPrimaryColor());
-    }
-
-    @OnClick(R.id.close_button)
-    protected void onCloseClicked(View view) {
-        mOriginalEditText.setText("");
-        onBackPressed();
     }
 
     private Subscription getTranslateSubscription() {

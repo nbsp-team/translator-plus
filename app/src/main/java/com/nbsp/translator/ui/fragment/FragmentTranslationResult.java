@@ -77,6 +77,24 @@ public class FragmentTranslationResult extends BaseFragment {
         return view;
     }
 
+    @OnClick(R.id.copy_to_button)
+    protected void copyResultToClipboard(View view) {
+        if (!mResultTo.getText().toString().isEmpty()) {
+            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("label", mResultTo.getText().toString());
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(getActivity(), R.string.text_copied, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnClick(R.id.container_detected_language)
+    protected void detectLanguageContainerClicked(View view) {
+        if (mListener != null && mCurrentDetectLanguage != null) {
+            mListener.onDetectedLanguageClicked(mCurrentDetectLanguage);
+        }
+    }
+
     @Override
     @Subscribe
     public void colorize(ThemeChangeEvent event) {
@@ -105,24 +123,6 @@ public class FragmentTranslationResult extends BaseFragment {
                         showDetectedLanguageCard(translateResult.getDetectedLang());
                     }
                 });
-    }
-
-    @OnClick(R.id.copy_to_button)
-    protected void copyResultToClipboard(View view) {
-        if (!mResultTo.getText().toString().isEmpty()) {
-            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("label", mResultTo.getText().toString());
-            clipboard.setPrimaryClip(clip);
-
-            Toast.makeText(getActivity(), R.string.text_copied, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @OnClick(R.id.container_detected_language)
-    protected void detectLanguageContainerClicked(View view) {
-        if (mListener != null && mCurrentDetectLanguage != null) {
-            mListener.onDetectedLanguageClicked(mCurrentDetectLanguage);
-        }
     }
 
     private void updateViews(String languageName, String result) {

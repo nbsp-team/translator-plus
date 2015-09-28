@@ -28,7 +28,6 @@ import butterknife.OnClick;
 import rx.Observable;
 
 public class FragmentLanguagePicker extends Fragment {
-    public static final int MAGIC_CONSTANT = 42;
 
     @Bind(R.id.language_from)
     protected Spinner mFromSpinner;
@@ -40,7 +39,6 @@ public class FragmentLanguagePicker extends Fragment {
     protected View mSwapButton;
 
     private List<DirectionChangedListener> mListeners = new ArrayList<>();
-
     public FragmentLanguagePicker() {}
 
     @Override

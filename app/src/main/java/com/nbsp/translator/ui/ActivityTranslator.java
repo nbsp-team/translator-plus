@@ -110,6 +110,36 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
         );
     }
 
+    @OnClick(R.id.main_bottom_button_image)
+    protected void captureImage() {
+        Intent intent = new Intent(this, ActivityCloudSightAnalyze.class);
+        startActivityForResult(intent, REQUEST_CODE_ANALYZE_PHOTO_ACTIVITY);
+    }
+
+    @OnClick(R.id.main_bottom_button_mic)
+    protected void speachToText() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, App.getInstance().getTranslationDirection().getFrom().getLanguageCode());
+        try {
+            startActivityForResult(intent, REQUEST_CODE_TEXT_RECOGNIZE_ACTIVITY );
+        } catch (Exception ignored) {}
+    }
+
+    @OnClick(R.id.original_text_input)
+    protected void openEditTextWithAnimation() {
+        Intent intent = new Intent(getApplicationContext(), ActivityEditText.class);
+        intent.putExtra(ActivityEditText.ORIGINAL_TEXT_EXTRA, mOriginalTextInput.getText().toString());
+
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                ActivityTranslator.this,
+                mLanguageInputContainer,
+                mLanguageInputContainer.getTransitionName()
+        );
+
+        ActivityCompat.startActivityForResult(this, intent,
+                REQUEST_CODE_EDIT_TEXT_ACTIVITY, activityOptions.toBundle());
+    }
+
     @Subscribe
     @Override
     public void colorize(ThemeChangeEvent event) {
@@ -153,21 +183,6 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
         mSubscription.unsubscribe();
     }
 
-    @OnClick(R.id.original_text_input)
-    protected void openEditTextWithAnimation() {
-        Intent intent = new Intent(getApplicationContext(), ActivityEditText.class);
-        intent.putExtra(ActivityEditText.ORIGINAL_TEXT_EXTRA, mOriginalTextInput.getText().toString());
-
-        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                ActivityTranslator.this,
-                mLanguageInputContainer,
-                mLanguageInputContainer.getTransitionName()
-        );
-
-        ActivityCompat.startActivityForResult(this, intent,
-                REQUEST_CODE_EDIT_TEXT_ACTIVITY, activityOptions.toBundle());
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -188,21 +203,6 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
                     break;
             }
         }
-    }
-
-    @OnClick(R.id.main_bottom_button_image)
-    protected void captureImage() {
-        Intent intent = new Intent(this, ActivityCloudSightAnalyze.class);
-        startActivityForResult(intent, REQUEST_CODE_ANALYZE_PHOTO_ACTIVITY);
-    }
-
-    @OnClick(R.id.main_bottom_button_mic)
-    protected void speachToText() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, App.getInstance().getTranslationDirection().getFrom().getLanguageCode());
-        try {
-            startActivityForResult(intent, REQUEST_CODE_TEXT_RECOGNIZE_ACTIVITY );
-        } catch (Exception ignored) {}
     }
 
     @Override
