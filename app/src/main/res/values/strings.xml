@@ -11,4 +11,5 @@
     <string name="make_photo">Сделать снимок</string>
     <string name="show_translation">Показать перевод</string>
     <string name="translate_from">Перевести с языка:</string>
+    <string name="speech_to_text">Голосовой ввод</string>
 </resources>

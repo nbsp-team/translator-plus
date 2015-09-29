@@ -117,7 +117,7 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
     }
 
     @OnClick(R.id.main_bottom_button_mic)
-    protected void speachToText() {
+    protected void speechToText() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, App.getInstance().getTranslationDirection().getFrom().getLanguageCode());
         try {

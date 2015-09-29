@@ -12,4 +12,5 @@
     <string name="text_copied">Text copied</string>
     <string name="сopy">Copy</string>
     <string name="translate_from">Translate from:</string>
+    <string name="speech_to_text">Speech to text</string>
 </resources>

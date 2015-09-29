@@ -20,8 +20,9 @@
             android:id="@+id/main_bottom_button_mic"
             android:layout_width="@dimen/main_bottom_button_size"
             android:layout_height="@dimen/main_bottom_button_size"
-            android:src="@drawable/ic_mic_black_36dp"
             android:layout_gravity="center"
+            android:src="@drawable/ic_mic_black_36dp"
+            android:contentDescription="@string/speech_to_text"
             style="@style/MainBottomButton"
             />
     </FrameLayout>
