@@ -2,6 +2,7 @@ package com.nbsp.translator.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -11,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
@@ -95,7 +95,9 @@ public class ActivityEditText extends BaseActivity {
     @Override
     public void colorize(ThemeChangeEvent event) {
         Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
-        getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        }
         mShowTranslationIcon.setColorFilter(currentTheme.getPrimaryColor());
         mResultTextView.setTextColor(currentTheme.getPrimaryColor());
     }
@@ -163,11 +165,14 @@ public class ActivityEditText extends BaseActivity {
     }
 
     private void disableBlinking() {
-        Transition fade = new Fade();
-        fade.excludeTarget(android.R.id.statusBarBackground, true);
-        fade.excludeTarget(android.R.id.navigationBarBackground, true);
-        getWindow().setExitTransition(fade);
-        getWindow().setEnterTransition(fade);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition fade = new Fade();
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
     }
 
 

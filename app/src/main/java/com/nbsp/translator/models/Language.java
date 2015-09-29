@@ -1,5 +1,7 @@
 package com.nbsp.translator.models;
 
+import android.os.Build;
+
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -23,7 +25,11 @@ public class Language implements Serializable {
     }
 
     public String getLanguageCode() {
-        return locale.toLanguageTag();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return locale.toLanguageTag();
+        } else {
+            return locale.getLanguage();
+        }
     }
 
     @Override

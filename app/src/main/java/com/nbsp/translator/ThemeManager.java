@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ThemeManager {
 
-    private static final int[] ATTRS = {android.R.attr.colorPrimary, android.R.attr.colorPrimaryDark};
+    private static final int[] ATTRS = {R.attr.colorPrimary, R.attr.colorPrimaryDark};
 
     private static final int[] THEMES = {R.style.BlueTheme, R.style.RedTheme, R.style.IndigoTheme,
             R.style.PinkTheme, R.style.CyanTheme, R.style.GreenTheme, R.style.OrangeTheme,
@@ -57,7 +57,6 @@ public class ThemeManager {
 
     @SuppressLint("Recycle")
     private void initThemes() {
-
         mThemes = new ArrayList<>();
 
         for (int theme : THEMES) {

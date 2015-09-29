@@ -1,6 +1,7 @@
 package com.nbsp.translator.ui;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
@@ -10,7 +11,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.nbsp.translator.App;
@@ -82,7 +82,7 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
                 .switchMap(task -> ApiTranslator.getInstance().translate(task))
                 .doOnNext(result -> setProgress(false));
 
-        FragmentTranslationResult translationCard = (FragmentTranslationResult) getFragmentManager().findFragmentById(R.id.translation_result_card);
+        FragmentTranslationResult translationCard = (FragmentTranslationResult) getSupportFragmentManager().findFragmentById(R.id.translation_result_card);
         Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
 
         Subscription saveToHistorySubscription = resultObservable
@@ -130,21 +130,27 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
         Intent intent = new Intent(getApplicationContext(), ActivityEditText.class);
         intent.putExtra(ActivityEditText.ORIGINAL_TEXT_EXTRA, mOriginalTextInput.getText().toString());
 
-        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                ActivityTranslator.this,
-                mLanguageInputContainer,
-                mLanguageInputContainer.getTransitionName()
-        );
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    ActivityTranslator.this,
+                    mLanguageInputContainer,
+                    mLanguageInputContainer.getTransitionName()
+            );
 
-        ActivityCompat.startActivityForResult(this, intent,
-                REQUEST_CODE_EDIT_TEXT_ACTIVITY, activityOptions.toBundle());
+            ActivityCompat.startActivityForResult(this, intent,
+                    REQUEST_CODE_EDIT_TEXT_ACTIVITY, activityOptions.toBundle());
+        } else {
+            startActivityForResult(intent, REQUEST_CODE_EDIT_TEXT_ACTIVITY);
+        }
     }
 
     @Subscribe
     @Override
     public void colorize(ThemeChangeEvent event) {
         Theme currentTheme = ThemeManager.getInstance(getApplicationContext()).getCurrentTheme();
-        getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(currentTheme.getPrimaryDarkColor());
+        }
         mToolbarContainer.setBackgroundColor(currentTheme.getPrimaryColor());
     }
 

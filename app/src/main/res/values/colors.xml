@@ -7,4 +7,9 @@
 
     <color name="white">#FFF</color>
     <color name="black">#000</color>
+
+    <color name="compatibility_pressed_color">#1a000000</color>
+    <color name="compatibility_focus_color">#48000000</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

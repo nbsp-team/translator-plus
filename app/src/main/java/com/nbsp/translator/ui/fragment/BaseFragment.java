@@ -1,6 +1,6 @@
 package com.nbsp.translator.ui.fragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 import com.nbsp.translator.BusProvider;
 import com.nbsp.translator.event.ThemeChangeEvent;
