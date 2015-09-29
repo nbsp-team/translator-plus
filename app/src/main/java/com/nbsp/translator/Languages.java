@@ -17,8 +17,8 @@ public class Languages {
             "pt", "ro", "sk", "sl", "sq", "sr", "sv", "sw", "tg", "th", "tl", "tr", "tt",
             "uk", "uz", "vi", "zh"};
 
-    private static Languages ourInstance = new Languages();
-    private List<Language> mLanguages;
+    private final static Languages ourInstance = new Languages();
+    private final List<Language> mLanguages;
 
     public static Languages getInstance() {
         return ourInstance;

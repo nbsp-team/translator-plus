@@ -30,7 +30,7 @@ public class ThemeManager {
     private List<Theme> mThemes;
     private int mCurrentThemeIndex;
 
-    private Context mContext;
+    private final Context mContext;
 
     public static ThemeManager getInstance(Context context) {
         if (ourInstance == null) {

@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class App {
-    private static App ourInstance = new App();
+    private final static App ourInstance = new App();
     private TranslationDirection mTranslationDirection;
 
     public static App getInstance() {

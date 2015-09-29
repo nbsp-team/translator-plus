@@ -10,7 +10,7 @@ import java.util.Locale;
  */
 
 public class Language implements Serializable {
-    private Locale locale;
+    private final Locale locale;
 
     public Language(String code) {
         this.locale = new Locale(code);

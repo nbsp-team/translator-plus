@@ -14,7 +14,7 @@ public class TranslateResultBar {
     private String mCurrentResult;
     private Boolean mIsStatusWaiting;
 
-    private LinearLayout mContainer;
+    private final LinearLayout mContainer;
     private TextView mTranslateResultTextView;
     private View.OnClickListener mOnClickListener;
 

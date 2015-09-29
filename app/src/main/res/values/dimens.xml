@@ -1,5 +1,4 @@
 <resources>
     <dimen name="original_text_input_height">140dp</dimen>
     <dimen name="main_bottom_button_size">56dp</dimen>
-    <dimen name="negative_action_bar_size">?attr/actionBarSize</dimen>
 </resources>

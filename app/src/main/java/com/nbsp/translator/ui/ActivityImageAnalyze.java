@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -160,13 +161,15 @@ public abstract class ActivityImageAnalyze extends BaseActivity {
     }
 
     private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
 
         if (!storageDir.exists()) {
-            storageDir.mkdirs();
+            if (!storageDir.mkdirs()) {
+                throw new IOException("mkdirs error");
+            }
         }
 
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);

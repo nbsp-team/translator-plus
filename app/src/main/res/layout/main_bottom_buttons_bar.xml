@@ -37,6 +37,7 @@
             android:layout_height="@dimen/main_bottom_button_size"
             android:layout_gravity="center"
             android:src="@drawable/ic_camera_alt_black_36dp"
+            android:contentDescription="@string/make_photo"
             style="@style/MainBottomButton"
             />
     </FrameLayout>

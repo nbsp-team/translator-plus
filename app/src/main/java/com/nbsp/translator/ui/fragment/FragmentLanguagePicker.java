@@ -38,13 +38,8 @@ public class FragmentLanguagePicker extends Fragment {
     @Bind(R.id.btn_swap)
     protected View mSwapButton;
 
-    private List<DirectionChangedListener> mListeners = new ArrayList<>();
+    private final List<DirectionChangedListener> mListeners = new ArrayList<>();
     public FragmentLanguagePicker() {}
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

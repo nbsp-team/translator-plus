@@ -10,13 +10,13 @@ import java.util.List;
 public class TranslateResult {
 
     @SerializedName("code")
-    private int mCode;
+    private final int mCode;
 
     @SerializedName("lang")
-    private String mLang;
+    private final String mLang;
 
     @SerializedName("text")
-    private List<String> mTexts;
+    private final List<String> mTexts;
 
     @SerializedName("detected")
     private DetectedLanguage detectedLang;

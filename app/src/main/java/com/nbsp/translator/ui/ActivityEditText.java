@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -141,9 +142,7 @@ public class ActivityEditText extends BaseActivity {
     }
 
     private void setResultListeners() {
-        mTranslateResultBar.setOnCLickListener(view -> {
-            onResult();
-        });
+        mTranslateResultBar.setOnCLickListener(view -> ActivityEditText.this.onResult());
 
         mOriginalEditText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

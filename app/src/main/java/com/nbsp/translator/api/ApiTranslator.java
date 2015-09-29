@@ -35,8 +35,8 @@ public class ApiTranslator {
         return instance;
     }
 
-    private final String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json";
-    private final String API_KEY = "trnsl.1.1.20150910T200437Z.e7c6c0d008f6e66e.46d4507dc332bb75eacc9414a76000251048c3be";
+    private static final String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json";
+    private static final String API_KEY = "trnsl.1.1.20150910T200437Z.e7c6c0d008f6e66e.46d4507dc332bb75eacc9414a76000251048c3be";
 
     private RestAdapter mRestAdapter;
     private YandexTranslator mYandexTranslator;

@@ -30,10 +30,9 @@ public class ApiCloudSight {
         return instance;
     }
 
-    private final String BASE_URL = "http://api.cloudsightapi.com";
-    private final String API_KEY = "j5vsP2ndffoCkcHHYSlTVA";
-    private final String API_SECRET = "bq90dHlxZFP-lviDcE-i7Q";
-    private final String DEFAULT_LOCATION = "en-US";
+    private static final String BASE_URL = "http://api.cloudsightapi.com";
+    private static final String API_KEY = "j5vsP2ndffoCkcHHYSlTVA";
+    private static final String DEFAULT_LOCATION = "en-US";
 
 
     private RestAdapter mRestAdapter;

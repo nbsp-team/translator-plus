@@ -9,7 +9,7 @@ import com.nbsp.translator.models.Language;
 
 public class DetectedLanguage {
     @SerializedName("lang")
-    private String code;
+    private final String code;
 
     public DetectedLanguage(String lang) {
         this.code = lang;

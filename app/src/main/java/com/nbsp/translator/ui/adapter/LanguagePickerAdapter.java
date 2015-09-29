@@ -21,7 +21,7 @@ public class LanguagePickerAdapter extends BaseAdapter {
     public static final String DROPDOWN = "dropdown";
     public static final String NON_DROPDOWN = "non_dropdown";
 
-    List<Language> mLanguages;
+    private final List<Language> mLanguages;
 
     public LanguagePickerAdapter() {
         mLanguages = Languages.getInstance().getLanguages();
