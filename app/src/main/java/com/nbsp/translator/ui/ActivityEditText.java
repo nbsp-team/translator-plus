@@ -154,7 +154,8 @@ public class ActivityEditText extends BaseActivity {
     }
 
     private void onResult() {
-        if (mTranslateResultBar.getCurrentResult().length() != 0) {
+        if (mTranslateResultBar.getCurrentResult() != null &&
+                mTranslateResultBar.getCurrentResult().length() != 0) {
             onBackPressed();
         }
     }
