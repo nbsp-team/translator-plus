@@ -83,9 +83,20 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
                 .doOnNext(result -> setProgress(false));
 
         FragmentTranslationResult translationCard = (FragmentTranslationResult) getSupportFragmentManager().findFragmentById(R.id.translation_result_card);
-        Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
 
-        Subscription saveToHistorySubscription = resultObservable
+        Subscription translationCardSubscription = translationCard.subscribe(resultObservable);
+        Subscription saveToHistorySubscription = subscribeHistorySave(resultObservable);
+        Subscription hideResultSubscription = subscribeHideResult();
+
+        mSubscription = new CompositeSubscription(
+                translationCardSubscription,
+                saveToHistorySubscription,
+                hideResultSubscription
+        );
+    }
+
+    private Subscription subscribeHistorySave(Observable<TranslateResult> resultObservable) {
+        return resultObservable
                 .debounce(1000, TimeUnit.MILLISECONDS)
                 .map(result -> new HistoryItem(
                         mOriginalTextInput.getText().toString(),
@@ -96,18 +107,14 @@ public class ActivityTranslator extends BaseActivity implements FragmentHistory.
                 .subscribe(historyItem -> {
                     History.putObject(ActivityTranslator.this, historyItem);
                 });
+    }
 
-        Subscription hideResultSubscription = getTranslationTaskObservable()
+    private Subscription subscribeHideResult() {
+        return getTranslationTaskObservable()
                 .filter(translationTask -> translationTask.getTextToTranslate().length() == 0)
                 .subscribe(translationTask -> {
                     mResultContainer.setVisibility(View.GONE);
                 });
-
-        mSubscription = new CompositeSubscription(
-                translationCardSubscription,
-                saveToHistorySubscription,
-                hideResultSubscription
-        );
     }
 
     @OnClick(R.id.main_bottom_button_image)
