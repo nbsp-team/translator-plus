@@ -18,7 +18,7 @@
     <style name="ToolBarThemeOverlay" parent="">
         <item name="android:textColorPrimary">#fff</item>
         <item name="colorControlNormal">#fff</item>
-        <item name="colorControlHighlight">#fff</item>
+        <item name="colorControlHighlight">#24000000</item>
         <item name="colorControlActivated">#fff</item>
     </style>
 
@@ -26,10 +26,12 @@
         <item name="android:theme">@style/ToolBarThemeOverlay</item>
         <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
