@@ -11,6 +11,7 @@ import com.nbsp.translator.models.theme.Theme;
 import com.squareup.otto.Subscribe;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import retrofit.mime.TypedFile;
 import rx.Observable;
@@ -19,6 +20,9 @@ import rx.Observable;
  * Created by Dimorinny on 23.09.15.
  */
 public class ActivityCloudSightAnalyze extends ActivityImageAnalyze {
+
+    public static final int MAX_RETRY_COUNT = 50;
+    public static final int RETRY_DELAY_SECONDS = 3;
 
     @Subscribe
     @Override
@@ -33,24 +37,18 @@ public class ActivityCloudSightAnalyze extends ActivityImageAnalyze {
 
         return ApiCloudSight.getInstance().recognize(imageFile,
                 App.getInstance().getTranslationDirection().getFrom().getLanguageCode())
+                .delay(RETRY_DELAY_SECONDS, TimeUnit.SECONDS)
                 .map(csSendImageResponse -> {
-                    CSCheckResultResponse checkResultResponse;
-                    while (true) {
-                        checkResultResponse = ApiCloudSight.getInstance().checkResponse(csSendImageResponse.getToken());
+                    CSCheckResultResponse checkResultResponse =
+                            ApiCloudSight.getInstance().checkResponse(csSendImageResponse.getToken());
 
-                        if (!checkResultResponse.getStatus().equals(CSCheckResultResponse.STATUS_NOT_COMPLETED)) {
-                            break;
-                        }
-
-                        try {
-                            Thread.sleep(3 * 1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    if (checkResultResponse.getStatus().equals(CSCheckResultResponse.STATUS_NOT_COMPLETED)) {
+                        throw new RuntimeException("Analyze not completed");
                     }
 
                     return checkResultResponse;
                 })
-                .map(CSCheckResultResponse::getName);
+                .map(CSCheckResultResponse::getName)
+                .retry(MAX_RETRY_COUNT);
     }
 }
