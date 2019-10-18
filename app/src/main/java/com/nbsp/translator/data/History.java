@@ -19,7 +19,7 @@ import rx.Observable;
 
 public class History {
     public static final String DB_NAME = "history.db";
-    private static StorIOSQLite mStorIOSQLite;
+    private static volatile StorIOSQLite mStorIOSQLite;
 
     public static StorIOSQLite getStorIO(Context context) {
         if (mStorIOSQLite != null) {
